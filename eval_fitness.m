@@ -3,7 +3,6 @@ function cuadratic_error = eval_fitness(patterns,A,P,beta)
 cuadratic_error = 0;
 j=1;
 windowsize = P(1);
-A
 
 while(j<=size(patterns,1))
     
@@ -28,8 +27,6 @@ while(j<=size(patterns,1))
     i = 1;
     while(i<m)
        membrane_potential = A(:,:,i)*V(i,:)';
-       A(:,:,i)
-       V(i,:)'
        V(i+1,:) =  [-1 tanh(membrane_potential'.* beta)];
        i=i+1;
     end

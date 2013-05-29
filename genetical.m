@@ -15,6 +15,7 @@ fitness = [];
 minimo = 1;
 count = 0;
 
+
 %Cantidad total de individuos
 N = cantidad_individuos;
 
@@ -24,43 +25,47 @@ series = series(1:750)./max_serie;
 
 %Se crea un vector con N individuos
 h=1;
-while ( h < N)
+while ( h <= N)
     individuos{h} = randommatrix(P,2,0.25);
     h = h + 1;
-    %N = N - 1;
 end
 
-individuos{1}
+
 
 while(minimo > err && count < generations)
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
-    while(j < cantidad_individuos)
-        new_fitness = eval_fitness(series,individuos{N},P,beta);
-        fitness = [fitness new_fitness];
-       j = j + 1;
+    cantidad_individuos
+    while(j <= cantidad_individuos)
+        A = individuos{j};
+        new_fitness = eval_fitness(series,A,P,beta);
+        fitness(j) = new_fitness;
+        j = j + 1;
     end
-
+    %fitness
     %windowsize = P(1);
 
 
     %ORDENAR ESE VECTOR POR FITNESS (BUBBLESORT -> Soy un hdp si)
     itemCount = length(fitness);
-    do
-      hasChanged = false;
+    hasChanged = true;
+    while(hasChanged)
       itemCount = itemCount - 1;
       for i = 1:itemCount
            if ( fitness(i) > fitness(i+1) )
-             individuos([i,i+1]) = fitness([i+1,i]); %swap
-             fitness([i,i+1]) = fitness([i+1,i]);  % swap
-             hasChanged = true;
+            %swap de individuos
+             M = individuos{i+1};
+             individuos{i+1} = individuos{i};
+             individuos{i} = M;
+             fitness([i,i+1]) = fitness([i+1,i]);  % swap de fitness
+             hasChanged = false;
            end
       end
-      until(hasChanged == false)
-
-      [minimo, iminimo] = min(fitness);
-      count = count + 1;
+    end
+    %fitness
+    [minimo, iminimo] = min(fitness);
+    count = count + 1;
 end
 
-mejor_individuo = individuos(iminimo);
+mejor_individuo = individuos{iminimo};
 
