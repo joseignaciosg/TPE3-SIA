@@ -3,7 +3,7 @@ function [a, b] = one_point(a, b)
 
 l = length(a);
 r = ceil( rand * l );
-i = r;
+i = r
 while ( i <= l )
 
 	aux = a(i);

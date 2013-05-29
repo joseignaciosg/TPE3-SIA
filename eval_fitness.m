@@ -4,7 +4,6 @@ cuadratic_error = 0;
 j=1;
 windowsize = P(1);
 
-
 while(j<=size(patterns,1))
     
     E = patterns(j,1:windowsize);
@@ -13,7 +12,7 @@ while(j<=size(patterns,1))
     max_neurons =max(P);
     m = length(P); %layers number
     V = zeros(m, max_neurons + 1); %+1 for the threshold
-    
+
     %the first row of V are the inputs
     aux = zeros(1,length(V(1,:))-length(E)-1);
     if (length(aux)>=1)
@@ -31,7 +30,7 @@ while(j<=size(patterns,1))
        V(i+1,:) =  [-1 tanh(membrane_potential'.* beta)];
        i=i+1;
     end
-    
+       
     %final output
     o = V(m,2);
     j=j+1;

@@ -1,4 +1,4 @@
-function [minimo, mejor_individuo] = genetical(series,P,err,epochs,beta,cantidad_individuos)
+function [minimo, mejor_individuo] = genetical(series,P,err,generations,beta,cantidad_individuos)
 
 %maximo valor de P para formar la matriz
 m = max(P);
@@ -10,10 +10,11 @@ m = max(P);
 %difference_weight = zeros(m,m+1,length(P)-1); %Delta_Peso
 
 %Variables
-individuos = [];
+individuos = cell(50);
 fitness = [];
 minimo = 1;
 count = 0;
+
 
 %Cantidad total de individuos
 N = cantidad_individuos;
@@ -23,40 +24,48 @@ max_serie = max(series);
 series = series(1:750)./max_serie;
 
 %Se crea un vector con N individuos
-while(N > 0)
-    individuos = [individuos randommatrix(P,2,0.25)];
-    N = N - 1;
+h=1;
+while ( h <= N)
+    individuos{h} = randommatrix(P,2,0.25);
+    h = h + 1;
 end
 
-while(minimo > err && count < epochs)
-    %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
-    N = cantidad_individuos;
-    while(N > 0)
-        new_fitness = eval_fitness(series,individuos(N),P,beta);
-        fitness = [fitness new_fitness];
-        N = N - 1;
-    end
 
+
+while(minimo > err && count < generations)
+    %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
+    j = 1;
+    cantidad_individuos
+    while(j <= cantidad_individuos)
+        A = individuos{j};
+        new_fitness = eval_fitness(series,A,P,beta);
+        fitness(j) = new_fitness;
+        j = j + 1;
+    end
+    %fitness
     %windowsize = P(1);
 
 
     %ORDENAR ESE VECTOR POR FITNESS (BUBBLESORT -> Soy un hdp si)
     itemCount = length(fitness);
-    do
-      hasChanged = false;
+    hasChanged = true;
+    while(hasChanged)
       itemCount = itemCount - 1;
       for i = 1:itemCount
            if ( fitness(i) > fitness(i+1) )
-             individuos([i,i+1]) = fitness([i+1,i]); %swap
-             fitness([i,i+1]) = fitness([i+1,i]);  % swap
-             hasChanged = true;
+            %swap de individuos
+             M = individuos{i+1};
+             individuos{i+1} = individuos{i};
+             individuos{i} = M;
+             fitness([i,i+1]) = fitness([i+1,i]);  % swap de fitness
+             hasChanged = false;
            end
       end
-      until(hasChanged == false)
-
-      [minimo, iminimo] = min(fitness);
-      count = count + 1;
+    end
+    %fitness
+    [minimo, iminimo] = min(fitness);
+    count = count + 1;
 end
 
-mejor_individuo = individuos(iminimo);
+mejor_individuo = individuos{iminimo};
 

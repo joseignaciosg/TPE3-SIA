@@ -3,7 +3,7 @@ function [a, b] = anular(a, b)
 
 l = length(a);
 start = ceil( rand * l );
-L = ceil( rand * l/2 );
+L = ceil( rand * l/2 )
 i = 0;
 while ( i <= L )
 
