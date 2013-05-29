@@ -1,4 +1,4 @@
-function [minimo, mejor_individuo] = genetical(series,P,err,epochs,beta,cantidad_individuos)
+function [minimo, mejor_individuo] = genetical(series,P,err,generations,beta,cantidad_individuos)
 
 %maximo valor de P para formar la matriz
 m = max(P);
@@ -10,7 +10,7 @@ m = max(P);
 %difference_weight = zeros(m,m+1,length(P)-1); %Delta_Peso
 
 %Variables
-individuos = [];
+individuos = cell(50);
 fitness = [];
 minimo = 1;
 count = 0;
@@ -23,18 +23,22 @@ max_serie = max(series);
 series = series(1:750)./max_serie;
 
 %Se crea un vector con N individuos
-while(N > 0)
-    individuos = [individuos randommatrix(P,2,0.25)];
-    N = N - 1;
+h=1;
+while ( h < N)
+    individuos{h} = randommatrix(P,2,0.25);
+    h = h + 1;
+    %N = N - 1;
 end
 
-while(minimo > err && count < epochs)
+individuos{1}
+
+while(minimo > err && count < generations)
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
-    N = cantidad_individuos;
-    while(N > 0)
-        new_fitness = eval_fitness(series,individuos(N),P,beta);
+    j = 1;
+    while(j < cantidad_individuos)
+        new_fitness = eval_fitness(series,individuos{N},P,beta);
         fitness = [fitness new_fitness];
-        N = N - 1;
+       j = j + 1;
     end
 
     %windowsize = P(1);
