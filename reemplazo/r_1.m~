@@ -2,8 +2,8 @@
 % F es un vector con los fitness correspondientes a las entradas de V
 function [S] = r_1(V, F)
 
-global pm; %probabilidad de mutar
-global pc; %probabilidad de cross over
+global pm;
+global pc;
 
 N = length(:,1);
 i = 1;
