@@ -7,9 +7,9 @@ L = ceil( rand * l/2 );
 i = 0;
 while ( i <= L )
 
-	aux = a(start + i);
-	a(start + i) = b(start + i);
-	b(start + i) = aux;
+	aux = a(mod(start + i, l));
+	a(mod(start + i, l)) = b(mod(start + i, l));
+	b(mod(start + i, l)) = aux;
 
 	i = i + 1;
 end
