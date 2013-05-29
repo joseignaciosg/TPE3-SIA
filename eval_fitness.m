@@ -1,11 +1,14 @@
 function cuadratic_error = eval_fitness(patterns,A,P,beta)
 
 cuadratic_error = 0;
+j=1;
+windowsize = P(1);
 
-while(i<=size(patterns,1))
+
+while(j<=size(patterns,1))
     
-    pattern = patterns(i,1:windowsize);
-    s = patterns(i,windowsize+1);
+    E = patterns(j,1:windowsize);
+    s = patterns(j,windowsize+1);
     
     max_neurons =max(P);
     m = length(P); %layers number
@@ -31,7 +34,7 @@ while(i<=size(patterns,1))
     
     %final output
     o = V(m,2);
-    i=i+1;
+    j=j+1;
     cuadratic_error = cuadratic_error + (s-o)^2;
 end
 

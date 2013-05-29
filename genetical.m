@@ -12,6 +12,8 @@ m = max(P);
 %Variables
 individuos = [];
 fitness = [];
+minimo = 1;
+count = 0;
 
 %Cantidad total de individuos
 N = cantidad_individuos;
@@ -30,14 +32,15 @@ while(minimo > err && count < epochs)
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     N = cantidad_individuos;
     while(N > 0)
-        fitness = [fitness eval_fitness(individuos(pattern,N,P,beta,max_serie))];
+        new_fitness = eval_fitness(series,individuos(N),P,beta);
+        fitness = [fitness new_fitness];
         N = N - 1;
     end
 
     %windowsize = P(1);
 
 
-    %ORDENAR ESE VECTOR POR FITNESS
+    %ORDENAR ESE VECTOR POR FITNESS (BUBBLESORT -> Soy un hdp si)
     itemCount = length(fitness);
     do
       hasChanged = false;
@@ -52,6 +55,7 @@ while(minimo > err && count < epochs)
       until(hasChanged == false)
 
       [minimo, iminimo] = min(fitness);
+      count = count + 1;
 end
 
 mejor_individuo = individuos(iminimo);
