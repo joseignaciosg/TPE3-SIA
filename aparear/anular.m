@@ -1,7 +1,7 @@
 %a y b son los individuos que se reciben como parametro
 function [a, b] = anular(a, b)
 
-l = length(V(:,1));
+l = length(a);
 start = ceil( rand * l );
 L = ceil( rand * l/2 );
 i = 0;
