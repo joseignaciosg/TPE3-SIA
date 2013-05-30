@@ -1,6 +1,11 @@
 function [minimo, mejor_individuo] = genetical(series,generations,cantidad_individuos)
 
+%para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
+addpath(genpath('./reemplazo'));
+addpath(genpath('./operators'));
+addpath(genpath('./evaluar'));
+addpath(genpath('./aparear'));
 
 
 global P; 
@@ -75,6 +80,7 @@ while(minimo > err && count < generations)
     count = count + 1;
 end
 
+individuos
 individuos = cell2matvec(individuos)
 individuos
 V
