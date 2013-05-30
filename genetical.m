@@ -10,8 +10,12 @@ addpath(genpath('./aparear'));
 
 global P; 
 global beta; 
+global pc; %probabilidad de cross over
+global pm; %probabilidad de mutar
 P = [3 5 1];
 beta = 0.3;
+pc = 0.75;
+pm = 0.9;
 err = 0.001;
 
 %maximo valor de P para formar la matriz
@@ -80,31 +84,27 @@ while(minimo > err && count <= generations)
     %fitness
     [minimo, iminimo] = min(fitness);
     count = count + 1;
-    minimos = [minimo minimos]
-    mejor_individuo = individuos{iminimo}
+    minimos = [minimo minimos];
+    mejor_individuo = individuos{iminimo};
     
-    individuos
+    individuos;
     %TODO arreglar esto por que falla aca por que individuos está mal
     V = cell2matvec(individuos);
 
     %se hace la selección y las mutaciones
-    %TODO: r_1.m no se si anda bien 
+    %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
+    V = V';
     R = r_1(V,fitness);
     
     for i=1:cantidad_individuos
-        W = vec2mat(R(:,i));
+        W = vec2mat(R(i,:));
         individuos{i} = W;
     end
     
-    individuos
+    individuos;
 
 end
 
-minimos
-
-
-
+minimos;
 
 end
-
-

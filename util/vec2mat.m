@@ -5,7 +5,7 @@ function W = vec2mat(vector)
     W = zeros(max_neurons,max_neurons+1,m-1);
 
     
-    i=1;j=1;k=1,l=1;
+    i=1;j=1;k=1;l=1;
     while(k<m)
         i=1;
         while(i<=P(k+1))

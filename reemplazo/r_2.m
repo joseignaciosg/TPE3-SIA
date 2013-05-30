@@ -8,12 +8,11 @@ N = length(V(:,1));
 R = zeros(N,length(1,:));
 
 
-S = ruleta(V, F, k); %seleccion. tiene que ser configurable. Esto esta mal
+S = ruleta(V, F, k); %seleccion. tiene que ser configurable.
 
 if( rand > pc ) % si hay que aparear... apareo!
 	i = 1;
-	used = zeros(k);
-	used(1) = 1;
+	used = zeros(1, k);
 	while(i <= k/2)
 		[a, b, used] = select2(S, used);
 		[S(a,:), S(b,:)] = anular( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
@@ -36,11 +35,18 @@ end
 %calcula la posicion de dos valores no usados en la matriz
 function [a, b, used] = select2(S, used)
 k = 1;
+N = length(S(:,1));
+
 while(used(k) == 1)
 	k = k + 1;
 end
 a = k;
-used(k) = 1;
-while( S(ceil( rand * (
+used(a) = 1;
+
+b = ceil( rand * (N - k) + k);
+while( b == 1)
+	b = ceil( rand * (N - k) + k);
+end
+used(b) = 1;
 
 end

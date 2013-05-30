@@ -7,8 +7,10 @@ ratio = 0.6;
 
 i = 1;
 while ( i <= l )
-
-	if(rand > ratio)
+	
+	r = rand
+	if(r > ratio)
+		disp("cambiando..");
 		aux = a(i);
 		a(i) = b(i);
 		b(i) = aux;

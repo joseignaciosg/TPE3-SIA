@@ -4,7 +4,7 @@ function vector = mat2vec(W)
     m = length(P);
 
     vector = [];
-    i=1;j=1;k=1,l=1;
+    i=1;j=1;k=1;l=1;
     while(k<m)
         i=1;
         while(i<=P(k+1))
