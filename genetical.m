@@ -1,4 +1,8 @@
-function [minimo, mejor_individuo] = genetical(series,P,err,generations,beta,cantidad_individuos)
+function [minimo, mejor_individuo] = genetical(series,generations,cantidad_individuos)
+
+beta = 0.3;
+err = 0.001;
+P = [3 5 1];
 
 %maximo valor de P para formar la matriz
 m = max(P);
@@ -35,7 +39,7 @@ end
 while(minimo > err && count < generations)
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
-    cantidad_individuos
+    cantidad_individuos;
     while(j <= cantidad_individuos)
         A = individuos{j};
         new_fitness = eval_fitness(series,A,P,beta);
