@@ -1,4 +1,5 @@
-function W = vec2mat(vector,P)
+function W = vec2mat(vector)
+    global P;
     max_neurons = max(P);
     m = length(P);
     W = zeros(max_neurons,max_neurons+1,m-1);

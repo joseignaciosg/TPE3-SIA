@@ -1,4 +1,5 @@
-function vector = mat2vec(W, P)
+function vector = mat2vec(W)
+    global P;
     max_neurons = max(P);
     m = length(P);
 

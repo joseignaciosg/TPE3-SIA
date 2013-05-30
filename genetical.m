@@ -1,5 +1,8 @@
 function [minimo, mejor_individuo] = genetical(series,generations,cantidad_individuos)
 
+addpath(genpath('./util'));
+
+
 global P; 
 global beta; 
 P = [3 5 1];
@@ -71,7 +74,10 @@ while(minimo > err && count < generations)
     [minimo, iminimo] = min(fitness);
     count = count + 1;
 end
- 
+
+individuos = cell2matvec(individuos)
+individuos
+V
 
 
 mejor_individuo = individuos{iminimo};
