@@ -24,10 +24,11 @@ m = max(P);
 %difference_weight = zeros(m,m+1,length(P)-1); %Delta_Peso
 
 %Variables
-individuos = cell(50);
+individuos = cell(cantidad_individuos,1);
 fitness = [];
 minimo = 1;
 count = 1;
+minimos = [];
 
 
 %Cantidad total de individuos
@@ -62,11 +63,9 @@ while(minimo > err && count <= generations)
     
     %ORDENAR ESE VECTOR POR FITNESS (BUBBLESORT -> Soy un hdp si)
     itemCount = length(fitness);
-    itemCount
     hasChanged = true;
     while(hasChanged == true && itemCount > 0)
       itemCount = itemCount - 1;
-      itemCount
       for i = 1:itemCount
            if ( fitness(i) > fitness(i+1) )
             %swap de individuos
@@ -80,17 +79,32 @@ while(minimo > err && count <= generations)
     end
     %fitness
     [minimo, iminimo] = min(fitness);
-    count = count + 1
+    count = count + 1;
+    minimos = [minimo minimos]
+    mejor_individuo = individuos{iminimo}
+    
+    individuos
+    %TODO arreglar esto por que falla aca por que individuos está mal
+    V = cell2matvec(individuos);
+
+    %se hace la selección y las mutaciones
+    %TODO: r_1.m no se si anda bien 
+    R = r_1(V,fitness);
+    
+    for i=1:cantidad_individuos
+        W = vec2mat(R(:,i));
+        individuos{i} = W;
+    end
+    
+    individuos
+
 end
 
-individuos
-%TODO arreglar esto por que falla aca por que individuos está mal
-V = cell2matvec(individuos)
-
-%se hace la selección y las mutaciones
-%TODO: r_1.m no se si anda bien 
-R = r_1(V,fitness)
+minimos
 
 
-mejor_individuo = individuos{iminimo};
+
+
+end
+
 

@@ -4,12 +4,16 @@ function [R] = r_1(V, F)
 
 global pc; %probabilidad de cross over
 
-N = length(V(:,1));
+disp('aca entre a r_1');
+V;
+F;
+
+M = length(V(:,1));
 i = 1;
-R = zeros(N,length(1,:));
+R = zeros(M,length(F(1,:)));
 
-while ( i < N/2 )
-
+while ( i < M )
+    
 	S = ruleta(V, F, 2); %seleccion. tiene que ser configurable
 	if( rand > pc )
 		[S(1,:), S(2,:)] = anular( S(1,:), S(2,:) ); %apareo. tiene que ser configurable
@@ -19,12 +23,13 @@ while ( i < N/2 )
 	while( j <= 2 )
 		S(j,:) = mutar(S(j,:));
 		j = j + 1;
-	end
-
+    end
+    
 	R(i,:) = S(1,:);
 	R(i + 1,:) = S(2,:);
 
-	i = i + 1;
+	i = i + 2;
+    
 end
 
 end

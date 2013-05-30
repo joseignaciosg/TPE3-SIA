@@ -10,6 +10,7 @@ n = length(individuos);
 V = zeros(26,n);
 
 while(i<=n)
-    V(i,:) = mat2vec(individuos{i});
+    W = individuos{i}
+    V(:,i) = mat2vec(W)';
     i=i+1;
 end
