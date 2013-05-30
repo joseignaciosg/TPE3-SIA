@@ -13,7 +13,7 @@ m = max(P);
 individuos = cell(50);
 fitness = [];
 minimo = 1;
-count = 0;
+count = 1;
 
 
 %Cantidad total de individuos
@@ -32,7 +32,7 @@ end
 
 
 
-while(minimo > err && count < generations)
+while(minimo > err && count <= generations)
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
     cantidad_individuos
@@ -42,6 +42,7 @@ while(minimo > err && count < generations)
         fitness(j) = new_fitness;
         j = j + 1;
     end
+  
     %fitness
     %windowsize = P(1);
 
@@ -49,7 +50,9 @@ while(minimo > err && count < generations)
     %ORDENAR ESE VECTOR POR FITNESS (BUBBLESORT -> Soy un hdp si)
     itemCount = length(fitness);
     hasChanged = true;
+      
     while(hasChanged)
+        a = 10000000000
       itemCount = itemCount - 1;
       for i = 1:itemCount
            if ( fitness(i) > fitness(i+1) )
@@ -64,7 +67,7 @@ while(minimo > err && count < generations)
     end
     %fitness
     [minimo, iminimo] = min(fitness);
-    count = count + 1;
+    count = count + 1
 end
 
 mejor_individuo = individuos{iminimo};
