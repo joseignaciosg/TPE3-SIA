@@ -54,11 +54,11 @@ while(minimo > err && count <= generations)
     
     %ORDENAR ESE VECTOR POR FITNESS (BUBBLESORT -> Soy un hdp si)
     itemCount = length(fitness);
+    itemCount
     hasChanged = true;
-      
-    while(hasChanged)
-        a = 10000000000
+    while(hasChanged == true && itemCount > 0)
       itemCount = itemCount - 1;
+      itemCount
       for i = 1:itemCount
            if ( fitness(i) > fitness(i+1) )
             %swap de individuos
