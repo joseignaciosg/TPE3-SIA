@@ -1,5 +1,13 @@
 function [minimo, mejor_individuo] = genetical(series,generations,cantidad_individuos)
 
+%para que se pueda ejecutar las funciones en las siguientes carpetas
+addpath(genpath('./util'));
+addpath(genpath('./reemplazo'));
+addpath(genpath('./operators'));
+addpath(genpath('./evaluar'));
+addpath(genpath('./aparear'));
+
+
 global P; 
 global beta; 
 P = [3 5 1];
@@ -74,7 +82,14 @@ while(minimo > err && count <= generations)
     [minimo, iminimo] = min(fitness);
     count = count + 1
 end
- 
+
+individuos
+%TODO arreglar esto por que falla aca por que individuos está mal
+V = cell2matvec(individuos)
+
+%se hace la selección y las mutaciones
+%TODO: r_1.m no se si anda bien 
+R = r_1(V,fitness)
 
 
 mejor_individuo = individuos{iminimo};
