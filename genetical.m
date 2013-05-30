@@ -1,4 +1,10 @@
-function [minimo, mejor_individuo] = genetical(series,P,err,generations,beta,cantidad_individuos)
+function [minimo, mejor_individuo] = genetical(series,generations,cantidad_individuos)
+
+global P; 
+global beta; 
+P = [3 5 1];
+beta = 0.3;
+err = 0.001;
 
 %maximo valor de P para formar la matriz
 m = max(P);
@@ -26,7 +32,7 @@ series = series(1:750)./max_serie;
 %Se crea un vector con N individuos
 h=1;
 while ( h <= N)
-    individuos{h} = randommatrix(P,2,0.25);
+    individuos{h} = randommatrix(2,0.25);
     h = h + 1;
 end
 
@@ -35,18 +41,17 @@ end
 while(minimo > err && count <= generations)
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
-    cantidad_individuos
+    cantidad_individuos;
     while(j <= cantidad_individuos)
         A = individuos{j};
-        new_fitness = eval_fitness(series,A,P,beta);
+        new_fitness = eval_fitness(series,A);
         fitness(j) = new_fitness;
         j = j + 1;
     end
   
     %fitness
     %windowsize = P(1);
-
-
+    
     %ORDENAR ESE VECTOR POR FITNESS (BUBBLESORT -> Soy un hdp si)
     itemCount = length(fitness);
     hasChanged = true;
@@ -69,6 +74,8 @@ while(minimo > err && count <= generations)
     [minimo, iminimo] = min(fitness);
     count = count + 1
 end
+ 
+
 
 mejor_individuo = individuos{iminimo};
 

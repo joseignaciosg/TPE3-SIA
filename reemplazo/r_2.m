@@ -1,33 +1,46 @@
 % V es una matriz que en cada fila tiene uno de los individuos (pesos de la red) ordenados con el de mayor fitness primero
 % F es un vector con los fitness correspondientes a las entradas de V
-function [S] = r_2(V, F, k)
+function [R] = r_2(V, F, k)
 
-global pm; %probabilidad de mutar
 global pc; %probabilidad de cross over
 
-N = length(:,1);
-i = 1;
+N = length(V(:,1));
 R = zeros(N,length(1,:));
 
-while ( i < N/2 )
 
-	S = ruleta(V, F, k); %seleccion. tiene que ser configurable
-	if( rand > pc )
-		anular( S(1,:), S(2,:) ); %apareo. tiene que ser configurable
+S = ruleta(V, F, k); %seleccion. tiene que ser configurable. Esto esta mal
+
+if( rand > pc ) % si hay que aparear... apareo!
+	i = 1;
+	used = zeros(k);
+	used(1) = 1;
+	while(i <= k/2)
+		[a, b, used] = select2(S, used);
+		[S(a,:), S(b,:)] = anular( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
+		i = i + 1;
 	end
-	
-	j = 1;
-	while( j <= 2 )
-		if( rand > pm )
-			mutar(S(j,:));
-		end
-		j = j + 1;
-	end
-
-	R(i,:) = S(1,:);
-	R(i + 1,:) = S(2,:);
-
-	i = i + 1;
 end
+
+j = 1;
+while( j <= 2 )
+	if( rand > pm )
+		mutar(S(j,:));
+	end
+	j = j + 1;
+end
+
+S(k + 1, N) = ruleta(V, F, N - k); %esto esta bien
+
+end
+
+%calcula la posicion de dos valores no usados en la matriz
+function [a, b, used] = select2(S, used)
+k = 1;
+while(used(k) == 1)
+	k = k + 1;
+end
+a = k;
+used(k) = 1;
+while( S(ceil( rand * (
 
 end
