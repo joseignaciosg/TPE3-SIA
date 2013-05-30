@@ -81,9 +81,12 @@ while(minimo > err && count < generations)
 end
 
 individuos
-individuos = cell2matvec(individuos)
-individuos
-V
+%TODO arreglar esto por que falla aca por que individuos está mal
+V = cell2matvec(individuos)
+
+%se hace la selección y las mutaciones
+%TODO: r_1.m no se si anda bien 
+R = r_1(V,fitness)
 
 
 mejor_individuo = individuos{iminimo};
