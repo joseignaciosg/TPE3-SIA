@@ -1,4 +1,7 @@
-function cuadratic_error = eval_fitness(patterns,A,P,beta)
+function cuadratic_error = eval_fitness(patterns,A)
+
+global P;
+global beta;
 
 cuadratic_error = 0;
 j=1;
