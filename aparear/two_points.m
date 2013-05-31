@@ -1,5 +1,5 @@
 %a y b son los individuos que se reciben como parametro
-function [a, b] = two_point(a, b)
+function [a, b] = two_points(a, b)
 
 l = length(a);
 r = ceil( rand * l );

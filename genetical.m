@@ -12,10 +12,13 @@ global P;
 global beta; 
 global pc; %probabilidad de cross over
 global pm; %probabilidad de mutar
+global T; %para boltzmann
+global G; %generation gap
+T = 1000;
 P = [3 5 1];
 beta = 0.3;
 pc = 0.75;
-pm = 0.9;
+pm = 0.995;
 err = 0.001;
 
 %maximo valor de P para formar la matriz
@@ -45,7 +48,7 @@ series = series(1:750)./max_serie;
 %Se crea un vector con N individuos
 h=1;
 while ( h <= N)
-    individuos{h} = randommatrix(2,0.25);
+    individuos{h} = randommatrix(1,0.25);
     h = h + 1;
 end
 
@@ -62,51 +65,37 @@ while(minimo > err && count <= generations)
         j = j + 1;
     end
   
-     in1 = individuos{1}
-    in2 = individuos{2}
-    in3 = individuos{3}
-    fitness
-    
-    %fitness
-    %windowsize = P(1);
-    
-    %ORDENAR ESE VECTOR POR FITNESS (BUBBLESORT -> Soy un hdp si)
-    itemCount = length(fitness);
-    hasChanged = false;
-    while(hasChanged == false && itemCount > 0)
-      itemCount = itemCount - 1;
-      for i = 1:itemCount
-           if ( fitness(i) > fitness(i+1) )
-            %swap de individuos
-             M = individuos{i+1};
-             individuos{i+1} = individuos{i};
-             individuos{i} = M;
-             fitness([i,i+1]) = fitness([i+1,i]);  % swap de fitness
-               hasChanged = false;
-           end
-      end
-    end
-    
-    disp('segunda parte')
-    in1 = individuos{1}
-    in2 = individuos{2}
-    in3 = individuos{3}
-    fitness
-    
-    %fitness
+
+itemCount = length(fitness);
+do
+	hasChanged = false;
+	itemCount--;
+	for i = 1:itemCount
+		if ( fitness(i) > fitness(i+1) )
+			M = individuos{i+1};
+			individuos{i+1} = individuos{i};
+			individuos{i} = M;
+			fitness([i,i+1]) = fitness([i+1,i]);  % swap
+			hasChanged = true;
+		end
+	endfor
+until(hasChanged == false)
+
+
+    fitness;
+
     [minimo, iminimo] = min(fitness);
     count = count + 1;
     minimos = [minimo minimos];
     mejor_individuo = individuos{iminimo};
     
     individuos;
-
     V = cell2matvec(individuos);
 
     %se hace la selección y las mutaciones
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
-    R = r_1(V,fitness);
+    R = r_2(V,1./fitness, 100);
     
     for i=1:cantidad_individuos
         W = vec2mat(R(i,:));

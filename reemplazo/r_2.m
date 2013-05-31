@@ -1,34 +1,33 @@
 % V es una matriz que en cada fila tiene uno de los individuos (pesos de la red) ordenados con el de mayor fitness primero
 % F es un vector con los fitness correspondientes a las entradas de V
-function [R] = r_2(V, F, k)
+function [S] = r_2(V, F, k)
 
 global pc; %probabilidad de cross over
 
 N = length(V(:,1));
-R = zeros(N,length(1,:));
+l = length(V(1,:));
+S = zeros(N, l);
 
 
-S = ruleta(V, F, k); %seleccion. tiene que ser configurable.
+S = boltzmann(V, F, k); %seleccion. tiene que ser configurable.
 
 if( rand > pc ) % si hay que aparear... apareo!
 	i = 1;
 	used = zeros(1, k);
 	while(i <= k/2)
 		[a, b, used] = select2(S, used);
-		[S(a,:), S(b,:)] = anular( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
+		[S(a,:), S(b,:)] = two_points( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
 		i = i + 1;
 	end
 end
 
 j = 1;
 while( j <= 2 )
-	if( rand > pm )
-		mutar(S(j,:));
-	end
+	S(j,:) = mutar(S(j,:));
 	j = j + 1;
 end
 
-S(k + 1, N) = ruleta(V, F, N - k); %esto esta bien
+S( (k + 1) : N, :) = boltzmann(V, F, N - k); %esto esta bien
 
 end
 
