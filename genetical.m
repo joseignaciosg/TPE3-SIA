@@ -62,13 +62,18 @@ while(minimo > err && count <= generations)
         j = j + 1;
     end
   
+     in1 = individuos{1}
+    in2 = individuos{2}
+    in3 = individuos{3}
+    fitness
+    
     %fitness
     %windowsize = P(1);
     
     %ORDENAR ESE VECTOR POR FITNESS (BUBBLESORT -> Soy un hdp si)
     itemCount = length(fitness);
-    hasChanged = true;
-    while(hasChanged == true && itemCount > 0)
+    hasChanged = false;
+    while(hasChanged == false && itemCount > 0)
       itemCount = itemCount - 1;
       for i = 1:itemCount
            if ( fitness(i) > fitness(i+1) )
@@ -77,10 +82,17 @@ while(minimo > err && count <= generations)
              individuos{i+1} = individuos{i};
              individuos{i} = M;
              fitness([i,i+1]) = fitness([i+1,i]);  % swap de fitness
-             hasChanged = false;
+               hasChanged = false;
            end
       end
     end
+    
+    disp('segunda parte')
+    in1 = individuos{1}
+    in2 = individuos{2}
+    in3 = individuos{3}
+    fitness
+    
     %fitness
     [minimo, iminimo] = min(fitness);
     count = count + 1;
@@ -88,7 +100,7 @@ while(minimo > err && count <= generations)
     mejor_individuo = individuos{iminimo};
     
     individuos;
-    %TODO arreglar esto por que falla aca por que individuos está mal
+
     V = cell2matvec(individuos);
 
     %se hace la selección y las mutaciones
@@ -105,6 +117,6 @@ while(minimo > err && count <= generations)
 
 end
 
-minimos;
+minimos
 
 end
