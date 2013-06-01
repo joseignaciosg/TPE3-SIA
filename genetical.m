@@ -1,4 +1,4 @@
-function [minimo, mejor_individuo] = genetical(series,generations,cantidad_individuos)
+function [minimo, mejor_individuo] = genetical(serie,generations,cantidad_individuos)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -8,12 +8,15 @@ addpath(genpath('./evaluar'));
 addpath(genpath('./aparear'));
 
 
-global P; 
-global beta; 
+global P;
+global beta;
 global pc; %probabilidad de cross over
 global pm; %probabilidad de mutar
 global T; %para boltzmann
 global G; %generation gap
+global series;
+series = serie;
+G = 0.9;
 T = 1000;
 P = [3 5 1];
 beta = 0.3;
@@ -57,7 +60,6 @@ end
 while(minimo > err && count <= generations)
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
-    cantidad_individuos;
     while(j <= cantidad_individuos)
         A = individuos{j};
         new_fitness = eval_fitness(series,A);
@@ -82,8 +84,6 @@ do
 until(hasChanged == false)
 
 
-    fitness;
-
     [minimo, iminimo] = min(fitness);
     count = count + 1;
     minimos = [minimo minimos];
@@ -95,17 +95,15 @@ until(hasChanged == false)
     %se hace la selección y las mutaciones
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
-    R = r_2(V,1./fitness, 100);
+    R = r_3(V, 1./fitness);
     
     for i=1:cantidad_individuos
         W = vec2mat(R(i,:));
         individuos{i} = W;
     end
     
-    individuos;
-
 end
 
-minimos
+minimos(1);
 
 end
