@@ -78,12 +78,8 @@ while(hasChanged == true)
 end
 
 S = zeros(N, l);
-os = sprintf('# apareamientos : %d', crossover_counter);
-disp(os);
-os = sprintf('# mutaciones : %d', mutation_counter);
-disp(os);
-os = sprintf('# backpropagations : %d', bpp_counter);
-disp(os);
+
+print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 S( (1 : N, :) = reemplazar(V, F, N - k);
 %S( 1 : N, :) = boltzmann(R, f, N); %esto esta bien
