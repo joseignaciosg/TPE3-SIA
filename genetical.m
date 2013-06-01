@@ -1,4 +1,4 @@
-function [minimo, mejor_individuo] = genetical(serie,generations,cantidad_individuos)
+function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, tipo_seleccion,tipo_reemplazo, tipo_apareo,algoritmoReemplazo,error)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -15,14 +15,24 @@ global pm; %probabilidad de mutar
 global T; %para boltzmann
 global G; %generation gap
 global series;
-series = serie;
-G = 0.9;
+global reemplazo;%criterio de seleccion
+global seleccion;%criterio de reemplazo
+global apareo;%aparear
+%Parametros Fijos
 T = 1000;
 P = [3 5 1];
-beta = 0.3;
-pc = 0.75;
-pm = 0.995;
-err = 0.001;
+beta = 0.3; %fijo no lo elije el usuario
+%Paremtros Variables
+pc = cp;%0.75;
+pm = mp;%0.995;
+err = error;%0.001;
+G = gap;%0.9;
+series = serie;
+reemplazo = tipo_seleccion;
+seleccion = tipo_reemplazo;
+algortimo_reemplazo = algoritmoReemplazo;
+apareo = tipo_apareo;
+
 
 %maximo valor de P para formar la matriz
 m = max(P);
@@ -57,7 +67,7 @@ end
 
 
 
-while(minimo > err && count <= generations)
+while(minimo > err && count <= max_generations)
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
     while(j <= cantidad_individuos)
@@ -97,7 +107,15 @@ while(minimo > err && count <= generations)
     %se hace la selección y las mutaciones
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
-    R = r_3(V, 1./fitness);
+    if ( algortimo_reemplazo == 1)
+        R = r_1(V, 1./fitness);
+    end
+    if ( algortimo_reemplazo == 2)
+        R = r_2(V, 1./fitness);
+    end
+    if ( algortimo_reemplazo == 3)
+        R = r_3(V, 1./fitness);
+    end
     
     for i=1:cantidad_individuos
         W = vec2mat(R(i,:));
@@ -106,6 +124,6 @@ while(minimo > err && count <= generations)
     
 end
 
-minimos(1);
+minimos
 
 end

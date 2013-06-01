@@ -12,14 +12,14 @@ l = length(V(1,:));
 S = zeros(N + k, l);
 
 
-S = boltzmann(V, F, k); %seleccion. tiene que ser configurable.
+S = seleccionar(V,F,k);%S = boltzmann(V, F, k); %seleccion. tiene que ser configurable.
 
 if( rand > pc ) % si hay que aparear... apareo!
 	i = 1;
 	used = zeros(1, k);
 	while(i <= k/2)
 		[a, b, used] = select2(S, used);
-		[S(a,:), S(b,:)] = two_points( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
+		[S(a,:), S(b,:)] = aparear( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
 		i = i + 1;
 	end
 end
