@@ -25,7 +25,7 @@ if( rand < pc ) % si hay que aparear... apareo!
 	i = 1;
 	used = zeros(1, k);
 	while(i <= k/2)
-		[a, b, used] = select2(S, used);
+		[a, b, used] = select2(S, used)
 		[S(a,:), S(b,:)] = aparear( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
 		i = i + 1;
 	end
@@ -46,15 +46,16 @@ while( j <= 2 )
 	j = j + 1;
 end
 
-S( (k + 1) : N, :) = seleccionar(V,F,N-k);
+S( (k + 1) : N, :) = reemplazar(V,F,N-k);
 %S( (k + 1) : N, :) = boltzmann(V, F, N - k); %esto esta bien
 
-print_stats(crossover_counter,mutation_counter,bpp_counter)
+%print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 end
 
 %calcula la posicion de dos valores no usados en la matriz
 function [a, b, used] = select2(S, used)
+used
 k = 1;
 N = length(S(:,1));
 
@@ -65,13 +66,9 @@ a = k;
 used(a) = 1;
 
 b = ceil( rand * (N - k) + k);
-while( b == 1)
+while( used(b) == 1)
 	b = ceil( rand * (N - k) + k);
 end
 used(b) = 1;
-
-
-
-
 
 end
