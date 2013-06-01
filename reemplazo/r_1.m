@@ -11,9 +11,9 @@ R = zeros(M, length(V(1,:)));
 i = 1;
 
 while ( i <= M )
-	S = ruleta(V, F, 2); %seleccion. tiene que ser configurable
-	if( rand < pc )
-		[S(1,:), S(2,:)] = anular( S(1,:), S(2,:) ); %apareo. tiene que ser configurable
+	S = seleccionar(V,F,2); %S = ruleta(V, F, 2); %seleccion. tiene que ser configurable
+	if( rand > pc )
+		[S(1,:), S(2,:)] = aparear( S(1,:), S(2,:) ); %apareo. tiene que ser configurable
 	end
 	
 	j = 1;
