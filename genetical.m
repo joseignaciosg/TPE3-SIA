@@ -147,7 +147,7 @@ while(minimo > err && count <= max_generations)
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
 
-    print(algoritmoReemplazo,reemplazo,seleccion,apareo,count)   
+    print(metodo_reemplazo,criterio_reemplazo,criterio_seleccion,apareo,count)   
     
     switch metodo_reemplazo
         case 1

@@ -47,7 +47,7 @@ while ( i <= M )
 end
 
 
-print_stats(crossover_counter,mutation_counter,bpp_counter)
+%print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 
 
