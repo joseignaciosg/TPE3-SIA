@@ -2,8 +2,15 @@
 % F es un vector con los fitness correspondientes a las entradas de V
 function [S] = r_2(V, F)
 
-global pc; %probabilidad de cross over
+
 global G;
+global pc;
+global pm;
+global pbpp;
+
+crossover_counter = 0;
+mutation_counter = 0;
+bpp_counter = 0;
 
 N = length(V(:,1));
 l = length(V(1,:));
@@ -13,7 +20,8 @@ k = round(G * N) + mod(round(G * N), 2);
 
 S = seleccionar(V,F,k); %seleccion. tiene que ser configurable.
 
-if( rand > pc ) % si hay que aparear... apareo!
+if( rand < pc ) % si hay que aparear... apareo!
+    crossover_counter = crossover_counter +1;
 	i = 1;
 	used = zeros(1, k);
 	while(i <= k/2)
@@ -25,11 +33,27 @@ end
 
 j = 1;
 while( j <= 2 )
-	S(j,:) = mutar(S(j,:));
+	
+    if  (rand < pm)
+        S(j,:) = mutar(S(j,:));
+        mutation_counter = mutation_counter +1;
+    end
+        
+    if (rand < pbpp)
+        S(j,:) = backpropagation(S(j,:));
+        bpp_counter = bpp_counter +1;
+    end
 	j = j + 1;
 end
 
 S( (k + 1) : N, :) = boltzmann(V, F, N - k); %esto esta bien
+
+os = sprintf('# apareamientos : %d', crossover_counter);
+disp(os);
+os = sprintf('# mutaciones : %d', mutation_counter);
+disp(os);
+os = sprintf('# backpropagations : %d', bpp_counter);
+disp(os);
 
 end
 
@@ -49,5 +73,9 @@ while( b == 1)
 	b = ceil( rand * (N - k) + k);
 end
 used(b) = 1;
+
+
+
+
 
 end
