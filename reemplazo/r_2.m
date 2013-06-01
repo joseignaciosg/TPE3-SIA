@@ -1,15 +1,17 @@
 % V es una matriz que en cada fila tiene uno de los individuos (pesos de la red) ordenados con el de mayor fitness primero
 % F es un vector con los fitness correspondientes a las entradas de V
-function [S] = r_2(V, F, k)
+function [S] = r_2(V, F)
 
 global pc; %probabilidad de cross over
+global G;
 
 N = length(V(:,1));
 l = length(V(1,:));
 S = zeros(N, l);
 
+k = round(G * N) + mod(round(G * N), 2);
 
-S = boltzmann(V, F, k); %seleccion. tiene que ser configurable.
+S = mixto(V, F, k); %seleccion. tiene que ser configurable.
 
 if( rand > pc ) % si hay que aparear... apareo!
 	i = 1;
