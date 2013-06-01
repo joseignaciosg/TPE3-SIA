@@ -45,7 +45,7 @@ function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_in
 addpath(genpath('./util'));
 addpath(genpath('./reemplazo'));
 addpath(genpath('./operators'));
-addpath(genpath('./selection'));
+addpath(genpath('./criteria'));
 addpath(genpath('./aparear'));
 
 
@@ -148,15 +148,27 @@ while(minimo > err && count <= max_generations)
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
     if ( algortimo_reemplazo == 1)
-        disp '* Utilizando reemplazo tipo 1';
+        disp '* Utilizando método de reemplazo tipo 1';
+        %os = sprintf('---- Generación  %d -------', count);
+        %disp(os);
+        %disp '* Utilizando criterio de selección tipo 1';
+        %disp '* Utilizando criterio de reemplazo tipo 1';        
         R = r_1(V, 1./fitness);
     end
     if ( algortimo_reemplazo == 2)
-        disp '* Utilizando reemplazo tipo 2';
+        disp '* Utilizando método de reemplazo tipo 2';
+        %os = sprintf('---- Generación  %d -------', count);
+        %disp(os);
+        %disp '* Utilizando criterio de selección tipo 1';
+        %disp '* Utilizando criterio de reemplazo tipo 1';
         R = r_2(V, 1./fitness);        
     end
     if ( algortimo_reemplazo == 3)
-        disp '* Utilizando reemplazo tipo 3';
+        disp '* Utilizando método de reemplazo tipo 3';
+        %os = sprintf('---- Generación  %d -------', count);
+        %disp(os);
+        %disp '* Utilizando criterio de selección tipo 1';
+        %disp '* Utilizando criterio de reemplazo tipo 1';
         R = r_3(V, 1./fitness);
     end
     
