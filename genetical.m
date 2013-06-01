@@ -1,7 +1,8 @@
 %Forma de invocación
 %
-%[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, tipo_seleccion,
-%                                        tipo_reemplazo, tipo_apareo,algoritmoReemplazo,error)
+%[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, criterio_seleccion,
+%                                        criterio_reemplazo, tipo_apareo,metodoReemplazo,error,error_estructura,
+%                                        error_contenido)
 %
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 %* max_generations : Cantidad máxima de generaciones a correr 
@@ -9,14 +10,19 @@
 %* gap : Brecha Generacional
 %* mp :  Probabilidad de Mutuacion
 %* cp :  Probabilidad de CrossOver
-%* tipo_seleccion : Metodo de Seleccion
-%* tipo_reemplazo : Metodo de Reemplazo
+%* criterio_seleccion : Identifica al criterio de seleccion a utilizar
+%* criterio_reemplazo : Identifica al criterio de reemplazo a utilizar
 %* tipo_apareo : Metodo de Apareo
-%* algoritmoReemplazo : Algoritmo de Reemplazo visto en clase
+%* tipo_reemplazo : Algoritmo de Reemplazo visto en clase
 %* error : Cota de corte por error.
-%* margen_error1: Margen de error para consid
+%* error_estructura: Margen de error para cortar la ejecución si una parte de
+%la pobación (parte_pobl)  no cambia de generacion
+%en generacion
+%* error_contenido: Margen de error para cortar la ejecución si el mejor 
+%fitness de la poblacion  no progresa mas que ese error
+
 %
-%Tipo de Seleccion y Reemplazo
+%Criterio de Seleccion y Reemplazo 
 %    
 %    * 1 : Elite
 %    * 2 : Ruleta
@@ -31,7 +37,7 @@
 %    * 3 : One-Point
 %    * 4 : Two-Points
 %
-%Algoritmos de Reemplazo
+%Metodos de Reemplazo
 %
 %    * 1 : Algoritmo de Reemplazo 1
 %    * 2 : Algoritmo de Reemplazo 2
@@ -40,7 +46,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, tipo_seleccion,tipo_reemplazo, tipo_apareo,algoritmoReemplazo,error)
+function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, criterio_seleccion,criterio_reemplazo, tipo_apareo,metodoReemplazo,error,error_estructura,error_contenido)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -62,7 +68,9 @@ global series;
 global reemplazo;%criterio de seleccion
 global seleccion;%criterio de reemplazo
 global apareo;%aparear
-
+global parte_pobl; %pocentaje de la población para el criterio de corte por estructura
+global error_estruc;
+global error_cont;
 %Parametros Fijos
 T = 1000;
 P = [3 5 1];
@@ -75,10 +83,13 @@ pbpp = 0.01;
 err = error;
 G = gap;
 series = serie;
-reemplazo = tipo_seleccion;
-seleccion = tipo_reemplazo;
-algortimo_reemplazo = algoritmoReemplazo;
+seleccion = criterio_seleccion;
+reemplazo = criterio_reemplazo;
+metodo_reemplazo = metodoReemplazo;
 apareo = tipo_apareo;
+parte_pobl = 0.75
+error_estruc = error_estructura;
+error_cont = error_estructura
 
 
 %maximo valor de P para formar la matriz
@@ -107,8 +118,8 @@ while ( h <= N)
 end
 
 
+print(metodoReemplazo,seleccion,reemplazo,apareo,count)   
 
-print(algoritmoReemplazo,reemplazo,seleccion,apareo,count)   
 while(minimo > err && count <= max_generations)
     outputString = sprintf('---- Generación  %d -------', count);
     disp(outputString);
@@ -151,9 +162,9 @@ while(minimo > err && count <= max_generations)
     %se hace la selección y las mutaciones
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
-   
+
     
-    switch algortimo_reemplazo
+    switch metodoReemplazo
         case 1
             R = r_1(V, 1./fitness);
         case 2
