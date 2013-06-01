@@ -25,6 +25,7 @@ while ( i <= M )
         if (rand < pbpp)
             S(j,:) = backpropagation(S(j,:));
         end
+        
 		j = j + 1;
 	end
     

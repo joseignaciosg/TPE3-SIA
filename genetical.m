@@ -23,8 +23,8 @@ P = [3 5 1];
 beta = 0.3;
 pc = 0.75;
 pm = 0.995;
-pbpp = 0.1
-err = 0.001;
+pbpp = 0.01;
+err = 0;
 
 %maximo valor de P para formar la matriz
 m = max(P);
@@ -93,7 +93,6 @@ while(minimo > err && count <= generations)
     minimos = [minimo minimos];
     mejor_individuo = individuos{iminimo};
     
-    individuos;
     V = cell2matvec(individuos);
 
     %se hace la selección y las mutaciones

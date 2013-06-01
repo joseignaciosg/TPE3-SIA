@@ -3,14 +3,13 @@
 function [a] = backpropagation( a )
 
 %convierto el vector a matriz
-A = vec2mat(a)
+A = vec2mat(a);
 
 global series;
 global P;
 global beta;
 eta = 0.045;
-err = 0.001;
-epochs = 10;
+epochs = 100;
 lrn_type = 3; %dinamico
  
 %maximo valor de P para formar la matriz
@@ -43,7 +42,7 @@ jump = 0;
 
 
 
-while(dif > err && count < epochs && abs(dif-old) > 1e-10)
+while(count < epochs && abs(dif-old) > 1e-10)
 	i=1;
 	old = dif;
 	cuadratic_error = 0;
