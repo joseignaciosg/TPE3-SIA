@@ -4,8 +4,8 @@ Algoritmos geneticos
 
 Forma de invocación:
 
-[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, tipo_seleccion,
-                                        tipo_reemplazo, tipo_apareo,algoritmoReemplazo,error)
+[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,
+                        gap,mp,cp,cs,cr, tipo_apareo,metodoReemplazo,error)
 
 * serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 * max_generations : Cantidad máxima de generaciones a correr 
@@ -13,13 +13,13 @@ Forma de invocación:
 * gap : Brecha Generacional
 * mp :  Probabilidad de Mutuacion
 * cp :  Probabilidad de CrossOver
-* tipo_seleccion : Metodo de Seleccion
-* tipo_reemplazo : Metodo de Reemplazo
+* cs : Identifica al criterio de seleccion a utilizar
+* ce : Identifica al criterio de reemplazo a utilizar
 * tipo_apareo : Metodo de Apareo
-* algoritmoReemplazo : Algoritmo de Reemplazo visto en clase
+* metodoReemplazo : Algoritmo de Reemplazo visto en clase
 * error : Cota de corte por error.
 
-Tipo de Seleccion y Reemplazo
+Criterios de Seleccion y Reemplazo
     
     * 1 : Elite
     * 2 : Ruleta
@@ -34,7 +34,7 @@ Tipo de Apareo
     * 3 : One-Point
     * 4 : Two-Points
 
-Algoritmos de Reemplazo
+Metodos de Reemplazo
 
     * 1 : Algoritmo de Reemplazo 1
     * 2 : Algoritmo de Reemplazo 2

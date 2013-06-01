@@ -1,7 +1,7 @@
 %Forma de invocación
 %
-%[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, criterio_seleccion,
-%                                        criterio_reemplazo, tipo_apareo,metodoReemplazo,error)
+%[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,
+%                           gap,mp,cp, cs, cr, tipo_apareo,metodoReemplazo,error)
 %
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 %* max_generations : Cantidad máxima de generaciones a correr 
@@ -9,10 +9,10 @@
 %* gap : Brecha Generacional
 %* mp :  Probabilidad de Mutuacion
 %* cp :  Probabilidad de CrossOver
-%* criterio_seleccion : Identifica al criterio de seleccion a utilizar
-%* criterio_reemplazo : Identifica al criterio de reemplazo a utilizar
+%* cs : Identifica al criterio de seleccion a utilizar
+%* cr : Identifica al criterio de reemplazo a utilizar
 %* tipo_apareo : Metodo de Apareo
-%* tipo_reemplazo : Algoritmo de Reemplazo visto en clase
+%* metodoReemplazo : Corresponde al metodo de Reemplazo visto en clase
 %* error : Cota de corte por error.
 %
 %Criterio de Seleccion y Reemplazo
@@ -39,7 +39,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, criterio_seleccion,criterio_reemplazo, tipo_apareo,metodoReemplazo,error)
+function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -58,8 +58,8 @@ global pbpp; %probabilidad de hacer 100 pasos de backpropagation
 global T; %para boltzmann
 global G; %generation gap
 global series;
-global reemplazo;%criterio de seleccion
-global seleccion;%criterio de reemplazo
+global criterio_reemplazo;%criterio de seleccion
+global criterio_seleccion;%criterio de reemplazo
 global apareo;%aparear
 
 %Parametros Fijos
@@ -74,8 +74,8 @@ pbpp = 0.01;
 err = error;
 G = gap;
 series = serie;
-reemplazo = criterio_seleccion;
-seleccion = criterio_reemplazo;
+criterio_reemplazo = cr;
+criterio_seleccion = cs;
 metodo_reemplazo = metodoReemplazo;
 apareo = tipo_apareo;
 
@@ -149,7 +149,7 @@ while(minimo > err && count <= max_generations)
 
     print(algoritmoReemplazo,reemplazo,seleccion,apareo,count)   
     
-    switch algortimo_reemplazo
+    switch metodo_reemplazo
         case 1
             R = r_1(V, 1./fitness);
         case 2
