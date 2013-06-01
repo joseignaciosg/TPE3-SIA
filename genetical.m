@@ -14,6 +14,7 @@
 %* tipo_apareo : Metodo de Apareo
 %* algoritmoReemplazo : Algoritmo de Reemplazo visto en clase
 %* error : Cota de corte por error.
+%* margen_error1: Margen de error para consid
 %
 %Tipo de Seleccion y Reemplazo
 %    
@@ -107,7 +108,11 @@ end
 
 
 
+print(algoritmoReemplazo,reemplazo,seleccion,apareo,count)   
 while(minimo > err && count <= max_generations)
+    outputString = sprintf('---- Generación  %d -------', count);
+    disp(outputString);
+
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
     while(j <= cantidad_individuos)
@@ -146,7 +151,7 @@ while(minimo > err && count <= max_generations)
     %se hace la selección y las mutaciones
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
-    print(algoritmoReemplazo,reemplazo,seleccion,apareo,count)   
+   
     
     switch algortimo_reemplazo
         case 1
