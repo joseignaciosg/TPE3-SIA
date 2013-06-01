@@ -46,10 +46,10 @@ while( j <= 2 )
 	j = j + 1;
 end
 
-S( (k + 1) : N, :) = seleccionar(V,F,N-k);
+S( (k + 1) : N, :) = reemplazar(V,F,N-k);
 %S( (k + 1) : N, :) = boltzmann(V, F, N - k); %esto esta bien
 
-print_stats(crossover_counter,mutation_counter,bpp_counter)
+%print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 end
 
@@ -65,13 +65,9 @@ a = k;
 used(a) = 1;
 
 b = ceil( rand * (N - k) + k);
-while( b == 1)
+while( used(b) == 1)
 	b = ceil( rand * (N - k) + k);
 end
 used(b) = 1;
-
-
-
-
 
 end
