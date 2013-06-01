@@ -1,8 +1,5 @@
 function print( metodo_reemplazo, criterio_seleccion, criterio_reemplazo, apareo,generation)
 
-outputString = sprintf('---- Generación  %d -------', generation);
-disp(outputString);
-
 
 switch metodo_reemplazo
     case 1
@@ -51,6 +48,9 @@ switch apareo
         disp '* tipo de apareo       : Two-Points';
 end
 
+
+outputString2 = sprintf('\n\n');
+disp(outputString2);
 
 
 
