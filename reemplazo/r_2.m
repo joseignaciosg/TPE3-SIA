@@ -25,7 +25,7 @@ if( rand < pc ) % si hay que aparear... apareo!
 	i = 1;
 	used = zeros(1, k);
 	while(i <= k/2)
-		[a, b, used] = select2(S, used)
+		[a, b, used] = select2(S, used);
 		[S(a,:), S(b,:)] = aparear( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
 		i = i + 1;
 	end
@@ -55,7 +55,6 @@ end
 
 %calcula la posicion de dos valores no usados en la matriz
 function [a, b, used] = select2(S, used)
-used
 k = 1;
 N = length(S(:,1));
 
