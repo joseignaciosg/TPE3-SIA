@@ -1,7 +1,7 @@
 %Forma de invocación
 %
-%[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, tipo_seleccion,
-%                                        tipo_reemplazo, tipo_apareo,algoritmoReemplazo,error)
+%[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, criterio_seleccion,
+%                                        criterio_reemplazo, tipo_apareo,metodoReemplazo,error)
 %
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 %* max_generations : Cantidad máxima de generaciones a correr 
@@ -9,13 +9,13 @@
 %* gap : Brecha Generacional
 %* mp :  Probabilidad de Mutuacion
 %* cp :  Probabilidad de CrossOver
-%* tipo_seleccion : Metodo de Seleccion
-%* tipo_reemplazo : Metodo de Reemplazo
+%* criterio_seleccion : Identifica al criterio de seleccion a utilizar
+%* criterio_reemplazo : Identifica al criterio de reemplazo a utilizar
 %* tipo_apareo : Metodo de Apareo
-%* algoritmoReemplazo : Algoritmo de Reemplazo visto en clase
+%* tipo_reemplazo : Algoritmo de Reemplazo visto en clase
 %* error : Cota de corte por error.
 %
-%Tipo de Seleccion y Reemplazo
+%Criterio de Seleccion y Reemplazo
 %    
 %    * 1 : Elite
 %    * 2 : Ruleta
@@ -30,7 +30,7 @@
 %    * 3 : One-Point
 %    * 4 : Two-Points
 %
-%Algoritmos de Reemplazo
+%Metodos de Reemplazo
 %
 %    * 1 : Algoritmo de Reemplazo 1
 %    * 2 : Algoritmo de Reemplazo 2
@@ -39,7 +39,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, tipo_seleccion,tipo_reemplazo, tipo_apareo,algoritmoReemplazo,error)
+function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, criterio_seleccion,criterio_reemplazo, tipo_apareo,metodoReemplazo,error)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -73,9 +73,9 @@ pbpp = 0.01;
 err = error;
 G = gap;
 series = serie;
-reemplazo = tipo_seleccion;
-seleccion = tipo_reemplazo;
-algortimo_reemplazo = algoritmoReemplazo;
+reemplazo = criterio_seleccion;
+seleccion = criterio_reemplazo;
+metodo_reemplazo = metodoReemplazo;
 apareo = tipo_apareo;
 
 
@@ -147,15 +147,15 @@ while(minimo > err && count <= max_generations)
     %se hace la selección y las mutaciones
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
-    if ( algortimo_reemplazo == 1)
+    if ( metodo_reemplazo == 1)
         disp '* Utilizando reemplazo tipo 1';
         R = r_1(V, 1./fitness);
     end
-    if ( algortimo_reemplazo == 2)
+    if ( metodo_reemplazo == 2)
         disp '* Utilizando reemplazo tipo 2';
         R = r_2(V, 1./fitness);        
     end
-    if ( algortimo_reemplazo == 3)
+    if ( metodo_reemplazo == 3)
         disp '* Utilizando reemplazo tipo 3';
         R = r_3(V, 1./fitness);
     end

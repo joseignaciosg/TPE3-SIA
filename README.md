@@ -53,7 +53,7 @@ Ejemplos de Ejecución
 
 Ejecuta la serie x con 100 generaciones maximo, 5 individuos, 0.9 es la brecha generacional, 
 0.9975 probabilidad de mutar, 0.75 probabildad de crossover, Elite para seleccion,
-Ruleta para el reemplazo, tipo de apaero one-point, reemplazo 1 y un error de corte
+Ruleta para el reemplazo, tipo de apaero one-point, metodo de reemplazo 1 y un error de corte
 de 0.001
 
 /// *** ///
@@ -62,7 +62,7 @@ de 0.001
 
 Ejecuta la serie x con 20 generaciones maximo, 10 individuos, 0.95 es la brecha generacional, 
 0.50 probabilidad de mutar, 0.60 probabildad de crossover, Ruleta para seleccion,
-Boltzmann para el reemplazo, tipo de apaero Anular, reemplazo 2 y un error de corte
+Boltzmann para el reemplazo, tipo de apaero Anular, metodo de reemplazo 2 y un error de corte
 de 0.003
 
 /// *** ///
@@ -71,7 +71,7 @@ de 0.003
 
 Ejecuta la serie x con 200 generaciones maximo, 50 individuos, 0.8 es la brecha generacional, 
 0.8 probabilidad de mutar, 0.9 probabildad de crossover, Torneo para seleccion,
-Ruleta para el reemplazo, tipo de apaero cup, reemplazo 3 y un error de corte
+Ruleta para el reemplazo, tipo de apaero cup, metodo de reemplazo 3 y un error de corte
 de 0.10
 
 
