@@ -119,12 +119,18 @@ print(metodoReemplazo,criterio_seleccion,criterio_reemplazo,apareo,count)
 content_criteria = inf;
 struct_criteria = inf;
 minimo_anterior = 0;
-change = inf;
+change = 0;
 
-while(minimo > err && count <= max_generations && content_criteria > error_cont && change > error_estruc  )
+while(minimo > err && count <= max_generations && content_criteria > error_cont   )
     outputString = sprintf('------ Generación  %d -------', count);
     disp(outputString);
 
+    if change > error_estruc
+        disp 'Terminación de ejecución por condición de estructura';
+        break
+    end
+    
+    
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
     while(j <= cantidad_individuos)
