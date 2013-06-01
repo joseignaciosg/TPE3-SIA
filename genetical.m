@@ -45,8 +45,9 @@ function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_in
 addpath(genpath('./util'));
 addpath(genpath('./reemplazo'));
 addpath(genpath('./operators'));
-addpath(genpath('./selection'));
+addpath(genpath('./criteria'));
 addpath(genpath('./aparear'));
+addpath(genpath('./print'));
 
 
 global P;
@@ -107,8 +108,6 @@ end
 
 
 while(minimo > err && count <= max_generations)
-    outputString = sprintf('---- Generación  %d -------', count);
-    disp(outputString);
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
     while(j <= cantidad_individuos)
@@ -147,28 +146,26 @@ while(minimo > err && count <= max_generations)
     %se hace la selección y las mutaciones
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
-    if ( metodo_reemplazo == 1)
-        disp '* Utilizando reemplazo tipo 1';
-        R = r_1(V, 1./fitness);
-    end
-    if ( metodo_reemplazo == 2)
-        disp '* Utilizando reemplazo tipo 2';
-        R = r_2(V, 1./fitness);        
-    end
-    if ( metodo_reemplazo == 3)
-        disp '* Utilizando reemplazo tipo 3';
-        R = r_3(V, 1./fitness);
-    end
+
+    print(algoritmoReemplazo,reemplazo,seleccion,apareo,count)   
     
-    outputString2 = sprintf('\n\n', count);
-    disp(outputString2);
-    
+    switch algortimo_reemplazo
+        case 1
+            R = r_1(V, 1./fitness);
+        case 2
+            R = r_2(V, 1./fitness);        
+        case 3
+            R = r_3(V, 1./fitness);            
+    end
+        
     for i=1:cantidad_individuos
         W = vec2mat(R(i,:));
         individuos{i} = W;
     end
-    
+    outputString2 = sprintf('\n\n');
+    disp(outputString2);
 end
+
 
 minimos
 

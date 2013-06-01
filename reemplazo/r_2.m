@@ -49,12 +49,7 @@ end
 S( (k + 1) : N, :) = seleccionar(V,F,N-k);
 %S( (k + 1) : N, :) = boltzmann(V, F, N - k); %esto esta bien
 
-os = sprintf('# apareamientos : %d', crossover_counter);
-disp(os);
-os = sprintf('# mutaciones : %d', mutation_counter);
-disp(os);
-os = sprintf('# backpropagations : %d', bpp_counter);
-disp(os);
+print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 end
 
