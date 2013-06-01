@@ -49,6 +49,7 @@ addpath(genpath('./operators'));
 addpath(genpath('./criteria'));
 addpath(genpath('./aparear'));
 addpath(genpath('./print'));
+addpath(genpath('./evaluar'));
 
 
 global P;
@@ -155,11 +156,11 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
     [minimo, iminimo] = min(fitness);
     count = count + 1;
     minimos = [minimo minimos];
-    mejor_individuo = individuos{iminimo}
+    mejor_individuo = individuos{iminimo};
     if criterio_contenido
         content_criteria = abs(minimo_anterior-minimo);
     end
-    minimo_anterior = minimo
+    minimo_anterior = minimo;
     
     V = cell2matvec(individuos);
 
