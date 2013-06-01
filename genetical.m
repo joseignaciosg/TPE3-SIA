@@ -66,20 +66,22 @@ while(minimo > err && count <= generations)
     end
   
 
-itemCount = length(fitness);
-do
-	hasChanged = false;
-	itemCount--;
-	for i = 1:itemCount
-		if ( fitness(i) > fitness(i+1) )
-			M = individuos{i+1};
-			individuos{i+1} = individuos{i};
-			individuos{i} = M;
-			fitness([i,i+1]) = fitness([i+1,i]);  % swap
-			hasChanged = true;
-		end
-	endfor
-until(hasChanged == false)
+ itemCount = length(fitness);
+    hasChanged = false;
+    while(hasChanged == false && itemCount > 0)
+      itemCount = itemCount - 1;
+      hasChanged= true;
+      for i = 1:itemCount
+           if ( fitness(i) > fitness(i+1) )
+            %swap de individuos
+             M = individuos{i+1};
+             individuos{i+1} = individuos{i};
+             individuos{i} = M;
+             fitness([i,i+1]) = fitness([i+1,i]);  % swap de fitness
+            hasChanged = false;
+           end
+      end
+    end
 
 
     fitness;
