@@ -27,6 +27,7 @@ beta = 0.3; %fijo no lo elije el usuario
 %Paremtros Variables
 pc = cp;%0.75;
 pm = mp;%0.995;
+pbpp = 0.01;
 err = error;%0.001;
 G = gap;%0.9;
 series = serie;
@@ -70,6 +71,8 @@ end
 
 
 while(minimo > err && count <= max_generations)
+    outputString = sprintf('---- Generacion  %d -------', count);
+    disp(outputString);
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
     while(j <= cantidad_individuos)
@@ -103,21 +106,26 @@ while(minimo > err && count <= max_generations)
     minimos = [minimo minimos];
     mejor_individuo = individuos{iminimo};
     
-    individuos;
     V = cell2matvec(individuos);
 
     %se hace la selección y las mutaciones
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
     if ( algortimo_reemplazo == 1)
+        disp '* Realizando reemplazo tipo 1';
         R = r_1(V, 1./fitness);
     end
     if ( algortimo_reemplazo == 2)
-        R = r_2(V, 1./fitness);
+        disp '* Realizando reemplazo tipo 2';
+        R = r_2(V, 1./fitness);        
     end
     if ( algortimo_reemplazo == 3)
+        disp '* Realizando reemplazo tipo 3';
         R = r_3(V, 1./fitness);
     end
+    
+    outputString2 = sprintf('\n\n', count);
+    disp(outputString2);
     
     for i=1:cantidad_individuos
         W = vec2mat(R(i,:));
