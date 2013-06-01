@@ -1,13 +1,78 @@
 TPE3-SIA
 
-Algoritmos gen√©ticos
+Algoritmos geneticos
 
-* Tomar la mejor red neuronal para el problema del TPE2
-* Tomar N configuraciones de pesos y usarlos como poblaci√≥n
-* Correr las mutaciones gen√©ticas a la poblaci√≥n M generaciones
-* Quedarse con el m√°s apto al final
+Forma de invocaciÛn:
 
-* se va a usar P = [3 5 1] con eta dinamico , beta=0.3 , no random, y funcion de transferencia tanh (dio un ECM de 0.0144) 
+[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, tipo_seleccion,
+                                        tipo_reemplazo, tipo_apareo,algoritmoReemplazo,error)
+
+* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
+* max_generations : Cantidad m·xima de generaciones a correr 
+* cantidad_individuos : Cantidad de Individuos que van a conformar la poblacion
+* gap : Brecha Generacional
+* mp :  Probabilidad de Mutuacion
+* cp :  Probabilidad de CrossOver
+* tipo_seleccion : Metodo de Seleccion
+* tipo_reemplazo : Metodo de Reemplazo
+* tipo_apareo : Metodo de Apareo
+* algoritmoReemplazo : Algoritmo de Reemplazo visto en clase
+* error : Cota de corte por error.
+
+Tipo de Seleccion y Reemplazo
+    
+    * 1 : Elite
+    * 2 : Ruleta
+    * 3 : Boltzmann
+    * 4 : Torneo
+    * 5 : Mixto
+
+Tipo de Apareo
+
+    * 1 : Anular
+    * 2 : Cup
+    * 3 : One-Point
+    * 4 : Two-Points
+
+Algoritmos de Reemplazo
+
+    * 1 : Algoritmo de Reemplazo 1
+    * 2 : Algoritmo de Reemplazo 2
+    * 3 : Algoritmo de Reemplazo 3
+
+Adicionalmente como parametros fijos se van a encontrar:
+
+    * P = [3 5 1] que fue la mejor estructura para el TP anterior.
+    * beta= 0.3
+    * pbbp = 0.01 Probabilidad de hacer BackPropagation sobre un individuo
+    * funcion de transferencia tanh
+
+Ejemplos de EjecuciÛn
+
+[minimo, mejor_individuo] = genetical(x,100,5,0.9,0.9975,0.75,1,2,3,1,0.001)
+
+Ejecuta la serie x con 100 generaciones maximo, 5 individuos, 0.9 es la brecha generacional, 
+0.9975 probabilidad de mutar, 0.75 probabildad de crossover, Elite para seleccion,
+Ruleta para el reemplazo, tipo de apaero one-point, reemplazo 1 y un error de corte
+de 0.001
+
+/// *** ///
+
+[minimo, mejor_individuo] = genetical(x,20,10,0.95,0.50,0.60,2,3,2,3,0.003)
+
+Ejecuta la serie x con 20 generaciones maximo, 10 individuos, 0.95 es la brecha generacional, 
+0.50 probabilidad de mutar, 0.60 probabildad de crossover, Ruleta para seleccion,
+Boltzmann para el reemplazo, tipo de apaero Anular, reemplazo 2 y un error de corte
+de 0.003
+
+/// *** ///
+
+[minimo, mejor_individuo] = genetical(x,200,50,0.8,0.8,0.9,4,2,2,3,0.10)
+
+Ejecuta la serie x con 200 generaciones maximo, 50 individuos, 0.8 es la brecha generacional, 
+0.8 probabilidad de mutar, 0.9 probabildad de crossover, Torneo para seleccion,
+Ruleta para el reemplazo, tipo de apaero cup, reemplazo 3 y un error de corte
+de 0.10
 
 
 
