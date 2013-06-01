@@ -87,9 +87,9 @@ criterio_seleccion = cs;
 metodo_reemplazo = metodoReemplazo;
 
 apareo = tipo_apareo;
-parte_pobl = 0.75
+parte_pobl = 0.75;
 error_estruc = error_estructura;
-error_cont = error_estructura
+error_cont = error_estructura;
 
 
 %maximo valor de P para formar la matriz
@@ -120,7 +120,9 @@ end
 
 print(metodoReemplazo,criterio_seleccion,criterio_reemplazo,apareo,count)   
 
-while(minimo > err && count <= max_generations)
+content_criteria = inf;
+struct_criteria = inf;
+while(minimo > err && count <= max_generations && content_criteria > error_contenido && struct_criteria > error_estructura )
     outputString = sprintf('---- Generación  %d -------', count);
     disp(outputString);
 
