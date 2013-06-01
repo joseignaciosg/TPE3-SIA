@@ -29,7 +29,8 @@ while( j <= 2 )
 	j = j + 1;
 end
 
-S( (k + 1) : N, :) = boltzmann(V, F, N - k); %esto esta bien
+S( (k + 1) : N, :) = seleccionar(V,F,N-k);
+%S( (k + 1) : N, :) = boltzmann(V, F, N - k); %esto esta bien
 
 end
 

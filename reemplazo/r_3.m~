@@ -61,7 +61,7 @@ until(hasChanged == false)
 
 S = zeros(N, l);
 
-S( (1 : N, :) = reemplazar(V, F, N - k);
+S( (1 : N, :) = reemplazar(V, F, N - k)
 %S( 1 : N, :) = boltzmann(R, f, N); %esto esta bien
 
 end
