@@ -64,7 +64,6 @@ global criterio_reemplazo;%criterio de seleccion
 global criterio_seleccion;%criterio de reemplazo
 global apareo;%aparear
 global parte_pobl; %pocentaje de la población para el criterio de corte por estructura
-global error_estruc;
 
 %Parametros Fijos
 T = 1000;
@@ -120,8 +119,9 @@ print(metodoReemplazo,criterio_seleccion,criterio_reemplazo,apareo,count)
 content_criteria = inf;
 struct_criteria = inf;
 minimo_anterior = 0;
+change = inf;
 
-while(minimo > err && count <= max_generations && content_criteria > error_cont && struct_criteria > error_estruc )
+while(minimo > err && count <= max_generations && content_criteria > error_cont && change > error_estruc  )
     outputString = sprintf('------ Generación  %d -------', count);
     disp(outputString);
 
@@ -178,6 +178,10 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
             R = r_3(V, 1./fitness);            
     end
         
+    if criterio_estructura
+        change = compute_change(V,R);
+    end
+    
     for i=1:cantidad_individuos
         W = vec2mat(R(i,:));
         individuos{i} = W;
