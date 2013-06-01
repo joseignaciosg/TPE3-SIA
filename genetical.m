@@ -22,7 +22,7 @@ global apareo;%aparear
 %Parametros Fijos
 T = 1000;
 P = [3 5 1];
-<<<<<<< HEAD
+
 beta = 0.3; %fijo no lo elije el usuario
 %Paremtros Variables
 pc = cp;%0.75;
@@ -35,13 +35,6 @@ seleccion = tipo_reemplazo;
 algortimo_reemplazo = algoritmoReemplazo;
 apareo = tipo_apareo;
 
-=======
-beta = 0.3;
-pc = 0.75;
-pm = 0.995;
-pbpp = 0.1
-err = 0.001;
->>>>>>> dd95a721c301929ad313bd73d254f33b69242c9d
 
 %maximo valor de P para formar la matriz
 m = max(P);
