@@ -1,6 +1,6 @@
 %Forma de invocación
 %
-%[minimo, [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,error_estructura,error_contenido)
+%[minimo, [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido)
 %
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 %* max_generations : Cantidad máxima de generaciones a correr 
@@ -13,12 +13,8 @@
 %* tipo_apareo : Metodo de Apareo
 %* metodoReemplazo : Corresponde al metodo de Reemplazo visto en clase
 %* error : Cota de corte por error.
-%* error_estructura: Margen de error para cortar la ejecución si una parte de
-%la pobación (parte_pobl)  no cambia de generacion
-%en generacion
-%* error_contenido: Margen de error para cortar la ejecución si el mejor 
-%fitness de la poblacion  no progresa mas que ese error
-
+%* criterio_estructura: 1 si se usa el criterio de corte por estructura, 0 si no. 
+%* criterio_contenido: 1 si se usa el criterio de corte por contenido, 0 si no. 
 %
 %Criterio de Seleccion y Reemplazo 
 %    
@@ -44,7 +40,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,error_estructura,error_contenido)
+function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -68,7 +64,7 @@ global criterio_seleccion;%criterio de reemplazo
 global apareo;%aparear
 global parte_pobl; %pocentaje de la población para el criterio de corte por estructura
 global error_estruc;
-global error_cont;
+
 %Parametros Fijos
 T = 1000;
 P = [3 5 1];
@@ -88,8 +84,8 @@ metodo_reemplazo = metodoReemplazo;
 
 apareo = tipo_apareo;
 parte_pobl = 0.75;
-error_estruc = error_estructura;
-error_cont = error_estructura;
+error_estruc = 1e-07;
+error_cont = 1e-07;
 
 
 %maximo valor de P para formar la matriz
@@ -122,8 +118,10 @@ print(metodoReemplazo,criterio_seleccion,criterio_reemplazo,apareo,count)
 
 content_criteria = inf;
 struct_criteria = inf;
-while(minimo > err && count <= max_generations && content_criteria > error_contenido && struct_criteria > error_estructura )
-    outputString = sprintf('---- Generación  %d -------', count);
+minimo_anterior = 0;
+
+while(minimo > err && count <= max_generations && content_criteria > error_cont && struct_criteria > error_estruc )
+    outputString = sprintf('------ Generación  %d -------', count);
     disp(outputString);
 
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
@@ -157,12 +155,15 @@ while(minimo > err && count <= max_generations && content_criteria > error_conte
     [minimo, iminimo] = min(fitness);
     count = count + 1;
     minimos = [minimo minimos];
-    mejor_individuo = individuos{iminimo};
+    mejor_individuo = individuos{iminimo}
+    if criterio_contenido
+        content_criteria = abs(minimo_anterior-minimo);
+    end
+    minimo_anterior = minimo
     
     V = cell2matvec(individuos);
 
     %se hace la selección y las mutaciones
-    %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
 
     
