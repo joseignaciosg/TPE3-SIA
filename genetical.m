@@ -1,8 +1,6 @@
 %Forma de invocación
 %
-%[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, criterio_seleccion,
-%                                        criterio_reemplazo, tipo_apareo,metodoReemplazo,error,error_estructura,
-%                                        error_contenido)
+%[minimo, [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,error_estructura,error_contenido)
 %
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 %* max_generations : Cantidad máxima de generaciones a correr 
@@ -10,10 +8,10 @@
 %* gap : Brecha Generacional
 %* mp :  Probabilidad de Mutuacion
 %* cp :  Probabilidad de CrossOver
-%* criterio_seleccion : Identifica al criterio de seleccion a utilizar
-%* criterio_reemplazo : Identifica al criterio de reemplazo a utilizar
+%* cs : Identifica al criterio de seleccion a utilizar
+%* cr : Identifica al criterio de reemplazo a utilizar
 %* tipo_apareo : Metodo de Apareo
-%* tipo_reemplazo : Algoritmo de Reemplazo visto en clase
+%* metodoReemplazo : Corresponde al metodo de Reemplazo visto en clase
 %* error : Cota de corte por error.
 %* error_estructura: Margen de error para cortar la ejecución si una parte de
 %la pobación (parte_pobl)  no cambia de generacion
@@ -46,7 +44,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, criterio_seleccion,criterio_reemplazo, tipo_apareo,metodoReemplazo,error,error_estructura,error_contenido)
+function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,error_estructura,error_contenido)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -65,8 +63,8 @@ global pbpp; %probabilidad de hacer 100 pasos de backpropagation
 global T; %para boltzmann
 global G; %generation gap
 global series;
-global reemplazo;%criterio de seleccion
-global seleccion;%criterio de reemplazo
+global criterio_reemplazo;%criterio de seleccion
+global criterio_seleccion;%criterio de reemplazo
 global apareo;%aparear
 global parte_pobl; %pocentaje de la población para el criterio de corte por estructura
 global error_estruc;
@@ -83,9 +81,11 @@ pbpp = 0.01;
 err = error;
 G = gap;
 series = serie;
-seleccion = criterio_seleccion;
-reemplazo = criterio_reemplazo;
+
+criterio_reemplazo = cr;
+criterio_seleccion = cs;
 metodo_reemplazo = metodoReemplazo;
+
 apareo = tipo_apareo;
 parte_pobl = 0.75
 error_estruc = error_estructura;
@@ -118,7 +118,7 @@ while ( h <= N)
 end
 
 
-print(metodoReemplazo,seleccion,reemplazo,apareo,count)   
+print(metodoReemplazo,criterio_seleccion,criterio_reemplazo,apareo,count)   
 
 while(minimo > err && count <= max_generations)
     outputString = sprintf('---- Generación  %d -------', count);
@@ -165,6 +165,7 @@ while(minimo > err && count <= max_generations)
 
     
     switch metodoReemplazo
+
         case 1
             R = r_1(V, 1./fitness);
         case 2

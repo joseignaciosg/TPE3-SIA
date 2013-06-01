@@ -10,7 +10,7 @@ while ( i <= l )
 	
 	r = rand
 	if(r > ratio)
-		disp("cambiando..");
+		disp('cambiando..');
 		aux = a(i);
 		a(i) = b(i);
 		b(i) = aux;

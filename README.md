@@ -2,6 +2,7 @@ TPE3-SIA
 
 Algoritmos geneticos
 
+<<<<<<< HEAD
 %Forma de invocación
 %
 %[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, criterio_seleccion,
@@ -24,8 +25,26 @@ Algoritmos geneticos
 %en generacion
 %* error_contenido: Margen de error para cortar la ejecución si el mejor 
 %fitness de la poblacion  no progresa mas que ese error
+=======
+Forma de invocación:
 
-Tipo de Seleccion y Reemplazo
+[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,
+                        gap,mp,cp,cs,cr, tipo_apareo,metodoReemplazo,error)
+
+* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
+* max_generations : Cantidad máxima de generaciones a correr 
+* cantidad_individuos : Cantidad de Individuos que van a conformar la poblacion
+* gap : Brecha Generacional
+* mp :  Probabilidad de Mutuacion
+* cp :  Probabilidad de CrossOver
+* cs : Identifica al criterio de seleccion a utilizar
+* ce : Identifica al criterio de reemplazo a utilizar
+* tipo_apareo : Metodo de Apareo
+* metodoReemplazo : Algoritmo de Reemplazo visto en clase
+* error : Cota de corte por error.
+>>>>>>> 28956dde64455dc0c22e615b06d0369d9702c26b
+
+Criterios de Seleccion y Reemplazo
     
     * 1 : Elite
     * 2 : Ruleta
@@ -40,7 +59,7 @@ Tipo de Apareo
     * 3 : One-Point
     * 4 : Two-Points
 
-Algoritmos de Reemplazo
+Metodos de Reemplazo
 
     * 1 : Algoritmo de Reemplazo 1
     * 2 : Algoritmo de Reemplazo 2
