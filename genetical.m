@@ -1,3 +1,44 @@
+%Forma de invocación
+%
+%[minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, tipo_seleccion,
+%                                        tipo_reemplazo, tipo_apareo,algoritmoReemplazo,error)
+%
+%* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
+%* max_generations : Cantidad máxima de generaciones a correr 
+%* cantidad_individuos : Cantidad de Individuos que van a conformar la poblacion
+%* gap : Brecha Generacional
+%* mp :  Probabilidad de Mutuacion
+%* cp :  Probabilidad de CrossOver
+%* tipo_seleccion : Metodo de Seleccion
+%* tipo_reemplazo : Metodo de Reemplazo
+%* tipo_apareo : Metodo de Apareo
+%* algoritmoReemplazo : Algoritmo de Reemplazo visto en clase
+%* error : Cota de corte por error.
+%
+%Tipo de Seleccion y Reemplazo
+%    
+%    * 1 : Elite
+%    * 2 : Ruleta
+%    * 3 : Boltzmann
+%    * 4 : Torneo
+%    * 5 : Mixto
+%
+%Tipo de Apareo
+%
+%    * 1 : Anular
+%    * 2 : Cup
+%    * 3 : One-Point
+%    * 4 : Two-Points
+%
+%Algoritmos de Reemplazo
+%
+%    * 1 : Algoritmo de Reemplazo 1
+%    * 2 : Algoritmo de Reemplazo 2
+%    * 3 : Algoritmo de Reemplazo 3
+%
+%   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
+%
+
 function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, tipo_seleccion,tipo_reemplazo, tipo_apareo,algoritmoReemplazo,error)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
@@ -19,17 +60,18 @@ global series;
 global reemplazo;%criterio de seleccion
 global seleccion;%criterio de reemplazo
 global apareo;%aparear
+
 %Parametros Fijos
 T = 1000;
 P = [3 5 1];
+beta = 0.3;
 
-beta = 0.3; %fijo no lo elije el usuario
 %Paremtros Variables
-pc = cp;%0.75;
-pm = mp;%0.995;
+pc = cp;
+pm = mp;
 pbpp = 0.01;
-err = error;%0.001;
-G = gap;%0.9;
+err = error;
+G = gap;
 series = serie;
 reemplazo = tipo_seleccion;
 seleccion = tipo_reemplazo;
@@ -39,12 +81,6 @@ apareo = tipo_apareo;
 
 %maximo valor de P para formar la matriz
 m = max(P);
-
-%para resear a un paso anterior la matriz de pesos
-%global reset
-%reset = 0;
-
-%difference_weight = zeros(m,m+1,length(P)-1); %Delta_Peso
 
 %Variables
 individuos = cell(cantidad_individuos,1);

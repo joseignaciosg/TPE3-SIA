@@ -2,14 +2,7 @@
 % F es un vector con los fitness correspondientes a las entradas de V
 function [S] = r_3(V, F)
 
-
-crossover_counter = 0;
-mutation_counter = 0;
-bpp_counter = 0;
-
-global pc;
-global pm;
-global pbpp;
+global pc; %probabilidad de cross over
 global G;
 global series;
 
@@ -21,8 +14,7 @@ S = zeros(N + k, l);
 
 S = seleccionar(V,F,k);%S = boltzmann(V, F, k); %seleccion. tiene que ser configurable.
 
-if( rand < pc ) % si hay que aparear... apareo!
-    crossover_counter = crossover_counter +1;
+if( rand > pc ) % si hay que aparear... apareo!
 	i = 1;
 	used = zeros(1, k);
 	while(i <= k/2)
@@ -34,15 +26,7 @@ end
 
 j = 1;
 while( j <= 2 )
-	if  (rand < pm)
-        S(j,:) = mutar(S(j,:));
-        mutation_counter = mutation_counter +1;
-    end
-        
-    if (rand < pbpp)
-        S(j,:) = backpropagation(S(j,:));
-        bpp_counter = bpp_counter +1;
-    end
+	S(j,:) = mutar(S(j,:));
 	j = j + 1;
 end
 
@@ -61,11 +45,9 @@ end
 
 %ordeno todos
 itemCount = length(f);
-
-hasChanged = true;
-while(hasChanged == true) 
-    hasChanged = false;
-	itemCount=itemCount-1;
+do
+	hasChanged = false;
+	itemCount--;
 	for i = 1 : itemCount
 		if ( f(i) > f(i+1) )
 			M = R(i+1, :);
@@ -73,23 +55,16 @@ while(hasChanged == true)
 			R(i, :) = M;
 			f([i,i+1]) = f([i+1,i]);  % swap
 			hasChanged = true;
-        end
-    end
-end
+		end
+	endfor
+until(hasChanged == false)
 
 S = zeros(N, l);
-os = sprintf('# apareamientos : %d', crossover_counter);
-disp(os);
-os = sprintf('# mutaciones : %d', mutation_counter);
-disp(os);
-os = sprintf('# backpropagations : %d', bpp_counter);
-disp(os);
 
-S( (1 : N, :) = reemplazar(V, F, N - k);
+S( (1 : N, :) = reemplazar(V, F, N - k)
 %S( 1 : N, :) = boltzmann(R, f, N); %esto esta bien
 
 end
- 
 
 %calcula la posicion de dos valores no usados en la matriz
 function [a, b, used] = select2(S, used)
@@ -107,9 +82,5 @@ while( b == 1)
 	b = ceil( rand * (N - k) + k);
 end
 used(b) = 1;
-
-
-
-
 
 end
