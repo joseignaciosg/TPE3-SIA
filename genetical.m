@@ -4,7 +4,7 @@ function [minimo, mejor_individuo] = genetical(serie,generations,cantidad_indivi
 addpath(genpath('./util'));
 addpath(genpath('./reemplazo'));
 addpath(genpath('./operators'));
-addpath(genpath('./evaluar'));
+addpath(genpath('./selection'));
 addpath(genpath('./aparear'));
 
 
@@ -12,6 +12,7 @@ global P;
 global beta;
 global pc; %probabilidad de cross over
 global pm; %probabilidad de mutar
+global pbpp; %probabilidad de hacer 100 pasos de backpropagation
 global T; %para boltzmann
 global G; %generation gap
 global series;
@@ -22,6 +23,7 @@ P = [3 5 1];
 beta = 0.3;
 pc = 0.75;
 pm = 0.995;
+pbpp = 0.1
 err = 0.001;
 
 %maximo valor de P para formar la matriz
@@ -68,7 +70,7 @@ while(minimo > err && count <= generations)
     end
   
 
- itemCount = length(fitness);
+    itemCount = length(fitness);
     hasChanged = false;
     while(hasChanged == false && itemCount > 0)
       itemCount = itemCount - 1;
@@ -97,7 +99,7 @@ while(minimo > err && count <= generations)
     %se hace la selección y las mutaciones
     %TODO: r_1.m no se si anda bien. Si, anda bien, pero hay que trasponer la matriz capo, si la pasas al reves no anda nada...
     V = V';
-    R = r_3(V, 1./fitness);
+    R = r_1(V, 1./fitness);
     
     for i=1:cantidad_individuos
         W = vec2mat(R(i,:));

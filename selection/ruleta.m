@@ -1,6 +1,7 @@
 % V es una matriz que en cada fila tiene uno de los individuos (pesos de la red) ordenados con el de mayor fitness primero
 % F es un vector con los fitness correspondientes a las entradas de V
 % k es la cantidad de individuos que quiero seleccionar (tiene que ser menor o igual al total)
+% S es una matriz con los individuos seleccionados
 function [S] = ruleta(V, F, k)
 
 f_total = sum(F);
