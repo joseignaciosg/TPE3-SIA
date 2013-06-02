@@ -40,7 +40,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimos, minimo, mejor_individuo] = genetical(serie,max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, error_estructura, error_contenido)
+function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
