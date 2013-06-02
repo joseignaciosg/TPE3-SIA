@@ -9,6 +9,7 @@ global pm;
 global pbpp;
 
 crossover_counter = 0;
+mutation_counter = 0;
 bpp_counter = 0;
 
 N = length(V(:,1));
@@ -34,7 +35,7 @@ end
 j = 1;
 while( j <= 2 )
 	
-	S(j,:) = mutar(S(j,:));
+	[S(j,:),mutation_counter] = mutar(S(j,:));
         
     if (rand < pbpp)
         S(j,:) = backpropagation(S(j,:));
