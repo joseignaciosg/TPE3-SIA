@@ -103,6 +103,7 @@ end
 used(b) = 1;
 
 
+%print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 
 

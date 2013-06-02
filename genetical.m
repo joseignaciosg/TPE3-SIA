@@ -216,4 +216,5 @@ while(minimo > err && count <= max_generations  )
     plot(x,maximos,'red',x,minimos,'blue',x,promedios,'green')
 end
 
+
 end
