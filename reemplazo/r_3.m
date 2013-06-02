@@ -80,7 +80,6 @@ S = zeros(N, l);
 print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 S(1 : N, :) = reemplazar(V, F, N);
-%S( 1 : N, :) = boltzmann(R, f, N); %esto esta bien
 
 end
  
@@ -103,7 +102,6 @@ end
 used(b) = 1;
 
 
-%print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 
 

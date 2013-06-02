@@ -157,6 +157,8 @@ while(minimo > err && count <= max_generations  )
     x = [count x];
     [minimo, iminimo] = min(fitness);
     [maximo, imaximo] = max(fitness);
+    os = sprintf('- mínimo               : %d',minimo);
+    disp(os);
     media = mean(fitness);
     count = count + 1;
     minimos = [minimo minimos];
@@ -186,6 +188,7 @@ while(minimo > err && count <= max_generations  )
             R = r_3(V, 1./fitness);            
     end
 
+   
         
     %CRITERIOS DE CORTE
     if (criterio_estructura == 1)   
@@ -212,7 +215,7 @@ while(minimo > err && count <= max_generations  )
     outputString2 = sprintf('\n\n');
     disp(outputString2);
     
-%    plot(x,maximos,'red',x,minimos,'blue',x,promedios,'green')
+    plot(x,maximos,'red',x,minimos,'blue',x,promedios,'green')
 end
 
 
