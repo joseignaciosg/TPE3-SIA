@@ -99,6 +99,7 @@ minimo = 1;
 count = 1;
 minimos = [];
 maximos = [];
+promedios = [];
 x = [];
 
 %Cantidad total de individuos
@@ -123,7 +124,7 @@ struct_criteria = inf;
 minimo_anterior = 0;
 change = 0;
 
-while(minimo > err && count <= max_generations && content_criteria > error_cont   )
+while(minimo > err && count <= max_generations  )
     outputString = sprintf('------ Generación  %d -------', count);
     disp(outputString);
  
@@ -158,14 +159,18 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
     x = [count x];
     [minimo, iminimo] = min(fitness);
     [maximo, imaximo] = max(fitness);
+    media = mean(fitness);
     count = count + 1;
     minimos = [minimo minimos];
     maximos = [maximo maximos];
+    promedios = [media promedios];
     mejor_individuo = individuos{iminimo};
     if criterio_contenido
         content_criteria = abs(minimo_anterior-minimo);
     end
     minimo_anterior = minimo;
+    
+    
     
     V = cell2matvec(individuos);
 
@@ -184,12 +189,22 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
     end
 
         
+    %CRITERIOS DE CORTE
     if (criterio_estructura == 1)   
-        changed = compute_change(V,R)
+        changed = compute_change(V,R);
         if ( changed == 0)
-              disp 'Terminación de ejecución por condición de estructura';
+              disp '[TERM] Terminación de ejecución por condición de estructura';
         break
         end
+    end
+    
+    if (criterio_contenido == 1)
+        if content_criteria > error_cont 
+             disp '[TERM] Terminación de ejecución por condición de contenido';
+             os = sprintf('Minimo anterior: %f / Mínimo actual: %f / Diferencia: %f', minimo_anterior,minimo, abs(minimo_anterior-minimo));
+             disp(os);
+        end
+        break
     end
     
     for i=1:cantidad_individuos
@@ -198,11 +213,11 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
     end
     outputString2 = sprintf('\n\n');
     disp(outputString2);
+    
+    plot(x,maximos,'red',x,minimos,'blue',x,promedios,'green')
 end
 
 
-%plot(minimos)
 
-plot(x,maximos,x,minimos)
 
 end
