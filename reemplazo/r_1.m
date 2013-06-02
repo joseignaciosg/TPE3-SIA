@@ -24,7 +24,7 @@ while ( i <= M )
 	
 	j = 1;
 	while( j <= 2 )
-		S(j,:) = mutar(S(j,:));
+		[S(j,:),mutation_counter] = mutar(S(j,:));
         
 		if (rand < pbpp)
 		    S(j,:) = backpropagation(S(j,:));
@@ -42,5 +42,9 @@ while ( i <= M )
 	i = i + 2;
     
 end
+
+
+
+%print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 end
