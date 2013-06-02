@@ -13,10 +13,10 @@ global pbpp;
 global G;
 global series;
 
-N = length(V(:,1));
-k = round(G * N) + mod(round(G * N), 2);
-l = length(V(1,:));
-S = zeros(N + k, l);
+N = length(V(:,1)); %cantidad de individuos
+k = round(G * N) - mod(round(G * N), 2);
+l = length(V(1,:)); %cantidad de focus
+S = zeros(N + k, l); %vector columna
 
 
 S = seleccionar(V,F,k);%S = boltzmann(V, F, k); %seleccion. tiene que ser configurable.
@@ -78,7 +78,7 @@ end
 S = zeros(N, l);
 
 print_stats(crossover_counter,mutation_counter,bpp_counter)
-s
+
 S(1 : N, :) = reemplazar(V, F, N);
 %S( 1 : N, :) = boltzmann(R, f, N); %esto esta bien
 

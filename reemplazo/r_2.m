@@ -16,7 +16,7 @@ N = length(V(:,1));
 l = length(V(1,:));
 S = zeros(N, l);
 
-k = round(G * N) + mod(round(G * N), 2);
+k = round(G * N) - mod(round(G * N), 2);
 S(1:k, :) = seleccionar(V,F,k); %seleccion. tiene que ser configurable.
 
 if( rand < pc ) % si hay que aparear... apareo!

@@ -126,7 +126,6 @@ change = 0;
 while(minimo > err && count <= max_generations  )
     outputString = sprintf('------ Generación  %d -------', count);
     disp(outputString);
- 
     
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
