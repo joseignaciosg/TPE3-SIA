@@ -19,20 +19,17 @@ while ( i <= M )
 	S = seleccionar(V,F,2); %S = ruleta(V, F, 2); %seleccion. tiene que ser configurable
 	if( rand < pc )       
 		[S(1,:), S(2,:)] = aparear( S(1,:), S(2,:) ); %apareo. tiene que ser configurable
-        crossover_counter = crossover_counter+1;
+		crossover_counter = crossover_counter+1;
 	end
 	
 	j = 1;
 	while( j <= 2 )
-        if  (rand < pm)
-        	S(j,:) = mutar(S(j,:));
-            mutation_counter = mutation_counter +1;
-        end
+		S(j,:) = mutar(S(j,:));
         
-        if (rand < pbpp)
-            S(j,:) = backpropagation(S(j,:));
-            bpp_counter = bpp_counter +1;
-        end
+		if (rand < pbpp)
+		    S(j,:) = backpropagation(S(j,:));
+		    bpp_counter = bpp_counter +1;
+		end
         
 		j = j + 1;
 	end
@@ -45,11 +42,5 @@ while ( i <= M )
 	i = i + 2;
     
 end
-
-
-print_stats(crossover_counter,mutation_counter,bpp_counter)
-
-
-
 
 end
