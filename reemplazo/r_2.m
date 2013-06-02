@@ -17,7 +17,6 @@ l = length(V(1,:));
 S = zeros(N, l);
 
 k = round(G * N) + mod(round(G * N), 2);
-
 S(1:k, :) = seleccionar(V,F,k); %seleccion. tiene que ser configurable.
 
 if( rand < pc ) % si hay que aparear... apareo!
@@ -43,8 +42,17 @@ while( j <= 2 )
     end
 	j = j + 1;
 end
+%N
+%k
+%H = reemplazar(V, F, N-k)
+%size(H)
+%k+1
+%N
+if ( N>k )
+    S( (k + 1) : N, :) = reemplazar(V, F, N-k);
+end
 
-S( (k + 1) : N, :) = reemplazar(V, F, N-k);
+print_stats(crossover_counter,mutation_counter,bpp_counter);
 
 end
 
@@ -63,7 +71,6 @@ while( used(b) == 1)
 	b = ceil( rand * (N - k) + k);
 end
 used(b) = 1;
-%print_stats(crossover_counter,mutation_counter,bpp_counter)
 
 
 end
