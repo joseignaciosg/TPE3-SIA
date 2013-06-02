@@ -64,6 +64,7 @@ global criterio_reemplazo;%criterio de seleccion
 global criterio_seleccion;%criterio de reemplazo
 global apareo;%aparear
 global parte_pobl; %pocentaje de la población para el criterio de corte por estructura
+global error_estruc;
 
 %Parametros Fijos
 T = 1000;
@@ -83,8 +84,8 @@ criterio_seleccion = cs;
 metodo_reemplazo = metodoReemplazo;
 
 apareo = tipo_apareo;
-parte_pobl = 0.75;
-error_estruc = 1e-01;
+parte_pobl = 0.05; % porcentaje de población que debe cambiar para que no se corte por criterio de estructura
+error_estruc = 1e-04;
 error_cont = 1e-07;
 
 
@@ -124,13 +125,7 @@ change = 0;
 while(minimo > err && count <= max_generations && content_criteria > error_cont   )
     outputString = sprintf('------ Generación  %d -------', count);
     disp(outputString);
-
-    change
-    if change > error_estruc
-        disp 'Terminación de ejecución por condición de estructura';
-        break
-    end
-    
+ 
     
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
@@ -185,8 +180,12 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
             R = r_3(V, 1./fitness);            
     end
         
-    if criterio_estructura == 1
-        change = compute_change(V,R);
+    if (criterio_estructura == 1)   
+        changed = compute_change(V,R)
+        if ( changed == 0)
+              disp 'Terminación de ejecución por condición de estructura';
+        break
+        end
     end
     
     for i=1:cantidad_individuos
