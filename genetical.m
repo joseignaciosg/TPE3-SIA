@@ -40,7 +40,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido)
+function [minimos, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -212,7 +212,7 @@ while(minimo > err && count <= max_generations  )
     outputString2 = sprintf('\n\n');
     disp(outputString2);
     
-    plot(x,maximos,'red',x,minimos,'blue',x,promedios,'green')
+%    plot(x,maximos,'red',x,minimos,'blue',x,promedios,'green')
 end
 
 

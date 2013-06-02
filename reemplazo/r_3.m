@@ -22,7 +22,7 @@ S = zeros(N + k, l); %vector columna
 S = seleccionar(V,F,k);%S = boltzmann(V, F, k); %seleccion. tiene que ser configurable.
 
 if( rand < pc ) % si hay que aparear... apareo!
-    crossover_counter = crossover_counter +1;
+    crossover_counter = crossover_counter + 1;
 	i = 1;
 	used = zeros(1, k);
 	while(i <= k/2)

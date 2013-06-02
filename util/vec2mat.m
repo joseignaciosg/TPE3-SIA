@@ -3,17 +3,17 @@ function W = vec2mat(vector)
     max_neurons = max(P);
     m = length(P);
     W = zeros(max_neurons,max_neurons+1,m-1);
-
 	i = 1;
-	while( i < m)
+	k = 1;
+	while( i < m )
 		j = 1;
-		while(j < P(j+1) )
-			W(j, 1:j * P(i) + 1, i) = vector( (j-1) * P(i) + j  : j * P(i) + 1);
+		while( j <= P(i+1) )
+			W(j, 1:P(i) + 1, i) = vector( k  : k + P(i));
+			k = k + P(i) + 1;
 			j = j + 1;
 		end
 		i = i + 1;
 	end
-    
 end
 
 

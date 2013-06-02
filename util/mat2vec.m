@@ -3,10 +3,12 @@ function vector = mat2vec(W)
     m = length(P);
     vector = [];
 	i = 1;
+	k = 1;
 	while(i < m)
-		j = 0;
-		while( j < P(i) )
-			vector( ((j*P(i))+1) : ((j+1)*P(i) + 1) ) = W(j+1,1:P(i)+1,i);
+		j = 1;
+		while( j <= P(i+1) )
+			vector( k : (k + P(i)) ) = W(j,1:P(i)+1,i);
+			k = k + P(i) + 1;
 			j = j + 1;
 		end
 	i = i + 1;
