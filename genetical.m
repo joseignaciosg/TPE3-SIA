@@ -181,7 +181,7 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
     end
         
     if (criterio_estructura == 1)   
-        changed = compute_change(V,R)
+        changed = compute_change(V,R);
         if ( changed == 0)
               disp 'Terminación de ejecución por condición de estructura';
         break
