@@ -98,7 +98,8 @@ fitness = [];
 minimo = 1;
 count = 1;
 minimos = [];
-
+maximos = [];
+x = [];
 
 %Cantidad total de individuos
 N = cantidad_individuos;
@@ -154,10 +155,12 @@ while(minimo > err && count <= max_generations  )
       end
     end
 
-
+    x = [count x];
     [minimo, iminimo] = min(fitness);
+    [maximo, imaximo] = max(fitness);
     count = count + 1;
     minimos = [minimo minimos];
+    maximos = [maximo maximos];
     mejor_individuo = individuos{iminimo};
     if criterio_contenido
         content_criteria = abs(minimo_anterior-minimo);
@@ -209,6 +212,8 @@ while(minimo > err && count <= max_generations  )
 end
 
 
-minimos
+%plot(minimos)
+
+plot(x,maximos,x,minimos)
 
 end
