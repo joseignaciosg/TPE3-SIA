@@ -172,7 +172,7 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
     %se hace la selección y las mutaciones
     V = V';
 
-    
+
     switch metodoReemplazo
 
         case 1
@@ -182,6 +182,7 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
         case 3
             R = r_3(V, 1./fitness);            
     end
+
         
     if (criterio_estructura == 1)   
         changed = compute_change(V,R)
