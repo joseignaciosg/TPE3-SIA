@@ -17,7 +17,7 @@ bpp_counter = 0;
 
 while ( i <= M )
 	S = seleccionar(V,F,2); %S = ruleta(V, F, 2); %seleccion. tiene que ser configurable
-	if( rand < pc )        
+	if( rand < pc )       
 		[S(1,:), S(2,:)] = aparear( S(1,:), S(2,:) ); %apareo. tiene que ser configurable
 		crossover_counter = crossover_counter+1;
 	end

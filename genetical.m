@@ -164,7 +164,7 @@ while(minimo > err && count <= max_generations  )
     maximos = [maximo maximos];
     promedios = [media promedios];
     mejor_individuo = individuos{iminimo};
-    if criterio_contenido
+    if error_contenido
         content_criteria = abs(minimo_anterior-minimo);
     end
     minimo_anterior = minimo;
@@ -176,7 +176,7 @@ while(minimo > err && count <= max_generations  )
     %se hace la selección y las mutaciones
     V = V';
 
-    
+
     switch metodoReemplazo
 
         case 1
@@ -186,6 +186,7 @@ while(minimo > err && count <= max_generations  )
         case 3
             R = r_3(V, 1./fitness);            
     end
+
         
     %CRITERIOS DE CORTE
     if (criterio_estructura == 1)   
@@ -196,7 +197,7 @@ while(minimo > err && count <= max_generations  )
         end
     end
     
-    if (criterio_contenido == 1)
+    if (error_contenido == 1)
         if content_criteria > error_cont 
              disp '[TERM] Terminación de ejecución por condición de contenido';
              os = sprintf('Minimo anterior: %f / Mínimo actual: %f / Diferencia: %f', minimo_anterior,minimo, abs(minimo_anterior-minimo));
