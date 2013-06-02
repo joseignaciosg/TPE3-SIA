@@ -99,6 +99,7 @@ minimo = 1;
 count = 1;
 minimos = [];
 maximos = [];
+promedios = [];
 x = [];
 
 %Cantidad total de individuos
@@ -158,9 +159,11 @@ while(minimo > err && count <= max_generations  )
     x = [count x];
     [minimo, iminimo] = min(fitness);
     [maximo, imaximo] = max(fitness);
+    media = mean(fitness);
     count = count + 1;
     minimos = [minimo minimos];
     maximos = [maximo maximos];
+    promedios = [media promedios];
     mejor_individuo = individuos{iminimo};
     if criterio_contenido
         content_criteria = abs(minimo_anterior-minimo);
@@ -209,11 +212,11 @@ while(minimo > err && count <= max_generations  )
     end
     outputString2 = sprintf('\n\n');
     disp(outputString2);
+    
+    plot(x,maximos,'red',x,minimos,'blue',x,promedios,'green')
 end
 
 
-%plot(minimos)
 
-plot(x,maximos,x,minimos)
 
 end
