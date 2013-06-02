@@ -9,7 +9,6 @@ global pm;
 global pbpp;
 
 crossover_counter = 0;
-mutation_counter = 0;
 bpp_counter = 0;
 
 N = length(V(:,1));
@@ -18,14 +17,15 @@ S = zeros(N, l);
 
 k = round(G * N) + mod(round(G * N), 2);
 
-S = seleccionar(V,F,k); %seleccion. tiene que ser configurable.
+S(1:k, :) = seleccionar(V,F,k); %seleccion. tiene que ser configurable.
 
 if( rand < pc ) % si hay que aparear... apareo!
-    crossover_counter = crossover_counter +1;
+    crossover_counter = crossover_counter + 1;
 	i = 1;
 	used = zeros(1, k);
-	while(i <= k/2)
-		[a, b, used] = select2(S, used);
+	limit = k/2 - mod(k, 2); %sino puedo tener una cantidad impar y no puedo aparear
+	while(i <= limit)
+		[a, b, used] = select2(S, used, k);
 		[S(a,:), S(b,:)] = aparear( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
 		i = i + 1;
 	end
@@ -34,10 +34,7 @@ end
 j = 1;
 while( j <= 2 )
 	
-    if  (rand < pm)
-        S(j,:) = mutar(S(j,:));
-        mutation_counter = mutation_counter +1;
-    end
+	S(j,:) = mutar(S(j,:));
         
     if (rand < pbpp)
         S(j,:) = backpropagation(S(j,:));
@@ -46,17 +43,13 @@ while( j <= 2 )
 	j = j + 1;
 end
 
-S( (k + 1) : N, :) = reemplazar(V,F,N-k);
-%S( (k + 1) : N, :) = boltzmann(V, F, N - k); %esto esta bien
-
-%print_stats(crossover_counter,mutation_counter,bpp_counter)
+S( (k + 1) : N, :) = reemplazar(V, F, N-k);
 
 end
 
 %calcula la posicion de dos valores no usados en la matriz
-function [a, b, used] = select2(S, used)
+function [a, b, used] = select2(S, used, N)
 k = 1;
-N = length(S(:,1));
 
 while(used(k) == 1)
 	k = k + 1;

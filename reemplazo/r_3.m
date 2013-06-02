@@ -4,7 +4,6 @@ function [S] = r_3(V, F)
 
 
 crossover_counter = 0;
-mutation_counter = 0;
 bpp_counter = 0;
 
 global pc;
@@ -34,10 +33,7 @@ end
 
 j = 1;
 while( j <= 2 )
-	if  (rand < pm)
-        S(j,:) = mutar(S(j,:));
-        mutation_counter = mutation_counter +1;
-    end
+	S(j,:) = mutar(S(j,:));
         
     if (rand < pbpp)
         S(j,:) = backpropagation(S(j,:));

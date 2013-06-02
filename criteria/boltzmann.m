@@ -8,8 +8,8 @@ global T;
 t_min = 50;
 l = length(V(:,1));
 used = zeros(1,l);
-p = zeros(1, length(V(:,1))); %probabilidad de cada uno
-q = zeros(1, length(V(:,1))); %probabilidad acumulada
+p = zeros(1, l); %probabilidad de cada uno
+q = zeros(1, l); %probabilidad acumulada
 S = zeros(k, length(V(1,:)));
 i = 1;
 

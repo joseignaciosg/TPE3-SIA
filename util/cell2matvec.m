@@ -4,11 +4,18 @@
 function [V] = cell2matvec(individuos)
 
 global P;
-i=1;
 n = length(individuos);
-%TODO sacar este magic number (funciona para la conf P elegida)
-V = zeros(26,n);
+i=1;
+l = 0;
+m = length(P);
+while(i < m)
+	l = l + (P(i) + 1) * P(i+1);
+	i = i + 1;
+end
 
+V = zeros(l,n);
+
+i = 1;
 while(i<=n)
     W = individuos{i};
     V(:,i) = mat2vec(W)';

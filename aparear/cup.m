@@ -3,14 +3,14 @@ function [a, b] = cup(a, b)
 
 l = length(a);
 
-ratio = 0.6;
+ratio = 0.65;
 
 i = 1;
 while ( i <= l )
 	
-	r = rand
+	r = rand;
 	if(r > ratio)
-		disp('cambiando..');
+%		disp("cambiando..");
 		aux = a(i);
 		a(i) = b(i);
 		b(i) = aux;

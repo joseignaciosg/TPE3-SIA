@@ -7,7 +7,7 @@ global criterio_seleccion;
     end
     
     if ( criterio_seleccion == 2 ) %ruleta
-        S = ruleta(V, F, 2);
+        S = ruleta(V, F, k);
     end
     
     if ( criterio_seleccion == 3 ) %Boltzmann

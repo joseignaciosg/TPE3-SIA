@@ -7,7 +7,7 @@ global criterio_reemplazo;
     end
     
     if ( criterio_reemplazo == 2 ) %ruleta
-        S = ruleta(V, F, 2);
+        S = ruleta(V, F, k);
     end
     
     if ( criterio_reemplazo == 3 ) %Boltzmann

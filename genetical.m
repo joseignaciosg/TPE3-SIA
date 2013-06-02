@@ -40,7 +40,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido)
+function [minimos, minimo, mejor_individuo] = genetical(serie,max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, error_estructura, error_contenido)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -50,7 +50,6 @@ addpath(genpath('./criteria'));
 addpath(genpath('./aparear'));
 addpath(genpath('./print'));
 addpath(genpath('./evaluar'));
-
 
 global P;
 global beta;
@@ -215,8 +214,5 @@ while(minimo > err && count <= max_generations  )
     
     plot(x,maximos,'red',x,minimos,'blue',x,promedios,'green')
 end
-
-
-
 
 end

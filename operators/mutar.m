@@ -6,7 +6,7 @@ i = 1;
 l = length(a);
 while(i < l)
 
-	if(rand > pm)
+	if(rand < pm)
 		a(i) = rand * ( abs(max(a)) + abs(min(a)) ) - abs(min(a));
 	end
 
