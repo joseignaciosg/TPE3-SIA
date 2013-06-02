@@ -84,7 +84,7 @@ metodo_reemplazo = metodoReemplazo;
 
 apareo = tipo_apareo;
 parte_pobl = 0.75;
-error_estruc = 1e-07;
+error_estruc = 1e-01;
 error_cont = 1e-07;
 
 
@@ -125,6 +125,7 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
     outputString = sprintf('------ Generación  %d -------', count);
     disp(outputString);
 
+    change
     if change > error_estruc
         disp 'Terminación de ejecución por condición de estructura';
         break
@@ -184,7 +185,7 @@ while(minimo > err && count <= max_generations && content_criteria > error_cont 
             R = r_3(V, 1./fitness);            
     end
         
-    if criterio_estructura
+    if criterio_estructura == 1
         change = compute_change(V,R);
     end
     
