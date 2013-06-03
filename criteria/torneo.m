@@ -3,7 +3,7 @@
 % k es la cantidad de individuos que quiero seleccionar (tiene que ser menor o igual al total)
 function [S] = torneo(V, F, k)
 
-used = zeros(1, length(V(:,1) );
+used = zeros(1, length(V(:,1) ));
 S = zeros(k, length(V(1,:)));
 i = 1;
 

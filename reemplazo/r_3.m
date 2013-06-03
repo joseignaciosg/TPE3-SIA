@@ -25,7 +25,8 @@ if( rand < pc ) % si hay que aparear... apareo!
     crossover_counter = crossover_counter + 1;
 	i = 1;
 	used = zeros(1, k);
-	while(i <= k/2)
+	limit = k/2 - mod(k, 2);
+	while(i <= limit)
 		[a, b, used] = select2(S, used);
 		[S(a,:), S(b,:)] = aparear( S(a,:), S(b,:) ); %apareo. tiene que ser configurable
 		i = i + 1;
@@ -33,7 +34,7 @@ if( rand < pc ) % si hay que aparear... apareo!
 end
 
 j = 1;
-while( j <= 2 )
+while( j <= k )
     
 	[S(j,:),mutation_counter] = mutar(S(j,:));
         
@@ -74,12 +75,13 @@ while(hasChanged == true)
         end
     end
 end
+f=1./f;
 
 S = zeros(N, l);
 
-print_stats(crossover_counter,mutation_counter,bpp_counter)
-
 S(1 : N, :) = reemplazar(R, f, N);
+
+print_stats(crossover_counter,mutation_counter,bpp_counter);
 
 end
  
@@ -100,9 +102,5 @@ while( b == 1)
 	b = ceil( rand * (N - k) + k);
 end
 used(b) = 1;
-
-
-
-
 
 end

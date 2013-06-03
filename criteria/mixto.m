@@ -8,6 +8,9 @@ S = zeros(k, length( V(1,:) ));
 a = 1.7;
 m = round(k/a);
 
+k
+m
+
 S(1 : m, :) = ruleta(V, F, m);
 S(m + 1 : k, :) = boltzmann(V, F, k - m);
 

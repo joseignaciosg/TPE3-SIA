@@ -124,8 +124,11 @@ minimo_anterior = 0;
 change = 0;
 
 while(minimo > err && count <= max_generations  )
-    outputString = sprintf('------ Generación  %d -------', count);
-    disp(outputString);
+	fid = fopen("testdata", "a"); # Open and clear the file
+    outputString = sprintf('------ Generación  %d -------\n', count);
+fprintf(fid, "%s ", outputString);
+fclose(fid);
+%    disp(outputString);
     
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
@@ -157,8 +160,12 @@ while(minimo > err && count <= max_generations  )
     x = [count x];
     [minimo, iminimo] = min(fitness);
     [maximo, imaximo] = max(fitness);
-    os = sprintf('- mínimo               : %d',minimo);
-    disp(os);
+	fid = fopen("testdata", "a"); # Open and clear the file
+    os = sprintf('- mínimo               : %d\n',minimo);
+fprintf(fid, "%s ", os);
+fclose(fid);
+
+%    disp(os);
     media = mean(fitness);
     count = count + 1;
     minimos = [minimo minimos];
@@ -212,10 +219,10 @@ while(minimo > err && count <= max_generations  )
         W = vec2mat(R(i,:));
         individuos{i} = W;
     end
-    outputString2 = sprintf('\n\n');
-    disp(outputString2);
+%    outputString2 = sprintf('\n\n');
+%    disp(outputString2);
     
-    plot(x,maximos,'red',x,minimos,'blue',x,promedios,'green')
+	plot(x,maximos,x,minimos,x,promedios);
 end
 
 

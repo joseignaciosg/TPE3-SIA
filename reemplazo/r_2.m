@@ -32,7 +32,7 @@ if( rand < pc ) % si hay que aparear... apareo!
 end
 
 j = 1;
-while( j <= 2 )
+while( j <= k )
 	
 	[S(j,:),mutation_counter] = mutar(S(j,:));
         
@@ -42,13 +42,8 @@ while( j <= 2 )
     end
 	j = j + 1;
 end
-%N
-%k
-%H = reemplazar(V, F, N-k)
-%size(H)
-%k+1
-%N
-if ( N>k )
+
+if ( N > k )
     S( (k + 1) : N, :) = reemplazar(V, F, N-k);
 end
 
