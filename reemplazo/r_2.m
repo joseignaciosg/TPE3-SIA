@@ -7,6 +7,9 @@ global G;
 global pc;
 global pm;
 global pbpp;
+global crossover_counter_total;
+global mutation_counter_total;
+global bpp_counter_total;
 
 crossover_counter = 0;
 mutation_counter = 0;
@@ -33,7 +36,6 @@ end
 
 j = 1;
 while( j <= k )
-	
 	[S(j,:),mutation_counter] = mutar(S(j,:));
         
     if (rand < pbpp)
@@ -48,6 +50,7 @@ if ( N > k )
 end
 
 print_stats(crossover_counter,mutation_counter,bpp_counter);
+increment_total_counters(crossover_counter,mutation_counter,bpp_counter);
 
 end
 

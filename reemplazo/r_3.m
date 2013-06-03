@@ -12,6 +12,9 @@ global pm;
 global pbpp;
 global G;
 global series;
+global crossover_counter_total;
+global mutation_counter_total;
+global bpp_counter_total;
 
 N = length(V(:,1)); %cantidad de individuos
 k = round(G * N) - mod(round(G * N), 2);
@@ -78,6 +81,9 @@ end
 f=1./f;
 
 S = zeros(N, l);
+
+print_stats(crossover_counter,mutation_counter,bpp_counter);
+increment_total_counters(crossover_counter,mutation_counter,bpp_counter);
 
 S(1 : N, :) = reemplazar(R, f, N);
 

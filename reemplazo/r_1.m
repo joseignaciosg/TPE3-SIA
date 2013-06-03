@@ -5,6 +5,9 @@ function [R] = r_1(V, F)
 global pc;
 global pm;
 global pbpp;
+global crossover_counter_total;
+global mutation_counter_total;
+global bpp_counter_total;
 
 M = length(V(:,1));
 R = zeros(M, length(V(1,:)));
@@ -44,7 +47,9 @@ while ( i <= M )
 end
 
 
+increment_total_counters(crossover_counter,mutation_counter,bpp_counter);
+print_stats(crossover_counter,mutation_counter,bpp_counter);
 
-print_stats(crossover_counter,mutation_counter,bpp_counter)
+
 
 end

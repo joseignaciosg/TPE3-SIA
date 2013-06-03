@@ -40,7 +40,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimos, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido)
+function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -64,6 +64,10 @@ global criterio_seleccion;%criterio de reemplazo
 global apareo;%aparear
 global parte_pobl; %pocentaje de la población para el criterio de corte por estructura
 global error_estruc;
+%para las estadísticas totales
+global crossover_counter_total;
+global mutation_counter_total;
+global bpp_counter_total;
 
 %Parametros Fijos
 T = 1000;
@@ -122,10 +126,14 @@ content_criteria = inf;
 struct_criteria = inf;
 minimo_anterior = 0;
 change = 0;
+crossover_counter_total = 0;
+mutation_counter_total = 0;
+bpp_counter_total = 0;
 
 while(minimo > err && count <= max_generations  )
     outputString = sprintf('------ Generación  %d -------', count);
     disp(outputString);
+   
     
     %EVALUAR CADA UNA Y OBTENER EL FITNESS DE LAS MISMAS
     j = 1;
@@ -219,5 +227,6 @@ while(minimo > err && count <= max_generations  )
 	plot(x,maximos,x,minimos,x,promedios);
 end
 
+print_total;
 
 end
