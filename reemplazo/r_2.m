@@ -20,9 +20,11 @@ l = length(V(1,:));
 S = zeros(N, l);
 
 k = round(G * N) - mod(round(G * N), 2);
+disp 'seleccionando';
 S(1:k, :) = seleccionar(V,F,k); %seleccion. tiene que ser configurable.
 
 if( rand < pc ) % si hay que aparear... apareo!
+    disp 'haciendo crossing over'
     crossover_counter = crossover_counter + 1;
 	i = 1;
 	used = zeros(1, k);
@@ -35,11 +37,11 @@ if( rand < pc ) % si hay que aparear... apareo!
 end
 
 j = 1;
-while( j <= 2 )
-	
+while( j <= k )
 	[S(j,:),mutation_counter] = mutar(S(j,:));
         
     if (rand < pbpp)
+        disp 'back propagating'
         S(j,:) = backpropagation(S(j,:));
         bpp_counter = bpp_counter +1;
     end
@@ -51,6 +53,7 @@ end
 %size(H)
 %k+1
 %N
+disp 'reemplazando'
 if ( N>k )
     S( (k + 1) : N, :) = reemplazar(V, F, N-k);
 end
