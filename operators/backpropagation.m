@@ -44,7 +44,7 @@ jump = 0;
 
 while(count < epochs && abs(dif-old) > 1e-10)
 	i=1;
-    count
+    %count
 	old = dif;
 	cuadratic_error = 0;
 	dif = 0;

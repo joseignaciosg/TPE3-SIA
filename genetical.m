@@ -42,7 +42,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido)
+function [minimo, mejor_individuo] = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
 %function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
@@ -53,7 +53,6 @@ addpath(genpath('./criteria'));
 addpath(genpath('./aparear'));
 addpath(genpath('./print'));
 addpath(genpath('./evaluar'));
-format long;
 
 global P;
 global beta;
@@ -66,9 +65,10 @@ global series;
 global criterio_reemplazo;%criterio de seleccion
 global criterio_seleccion;%criterio de reemplazo
 global structure_changes;%para los cambios en las N generaciones con el criterio de estructura
-global structure_changes_n;%numero de generaciones que puede quedar la estructura sin cambios
+global content_changes;%para los cambios en las N generaciones con el criterio de contenido
+global changes_n;%numero de generaciones que puede quedar la estructura sin cambios
 global apareo;%aparear
-global parte_pobl; %pocentaje de la población para el criterio de corte por estructura
+global parte_pobl; %porcentaje de la población para el criterio de corte por estructura
 global error_estruc;
 %para las estadísticas totales
 global crossover_counter_total;
@@ -97,10 +97,12 @@ metodo_reemplazo = metodoReemplazo;
 apareo = tipo_apareo;
 parte_pobl = 0.70; % porcentaje de población que debe cambiar para que no se corte por criterio de estructura
 error_estruc = 1e-07;
-error_cont = 1e-07;
+error_cont = 1e-04;
+
 
 structure_changes = []
-structure_changes_n = 5; 
+content_changes  = []
+changes_n = 5; 
 
 %maximo valor de P para formar la matriz
 m = max(P);
@@ -214,19 +216,20 @@ while(minimo > err && count <= max_generations  )
     %CRITERIOS DE CORTE
     if (criterio_estructura == 1)   
         compute_change(V,R);    
-        if ( check_struck_non_change() )
+        if ( check_non_change(structure_changes) )
               disp '[TERM] Terminación de ejecución por condición de estructura';
         break
         end
     end
     
     if (criterio_contenido == 1)
-        if content_criteria > error_cont 
+        compute_change_content(content_criteria,error_cont)
+        if ( check_non_change(content_changes) )
              disp '[TERM] Terminación de ejecución por condición de contenido';
              os = sprintf('Minimo anterior: %f / Mínimo actual: %f / Diferencia: %f', minimo_anterior,minimo, abs(minimo_anterior-minimo));
              disp(os);
+             breakerror_cont = 1e-04;
         end
-        break
     end
     
     for i=1:cantidad_individuos
@@ -239,6 +242,6 @@ while(minimo > err && count <= max_generations  )
 	plot(x,maximos,x,minimos,x,promedios);
 end
 
-print_total;
+print_total();
 
 end
