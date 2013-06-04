@@ -1,6 +1,6 @@
 %Forma de invocación
 %
-%[minimo, [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido)
+%[minimo, [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido, pm_decrease, mix_type)
 %
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 %* max_generations : Cantidad máxima de generaciones a correr 
@@ -15,6 +15,8 @@
 %* error : Cota de corte por error.
 %* criterio_estructura: 1 si se usa el criterio de corte por estructura, 0 si no. 
 %* criterio_contenido: 1 si se usa el criterio de corte por contenido, 0 si no. 
+%* pm_decrease: cuanto varia pm cada vez que transcurren 10% de las iteraciones totales, 1 si no varia. (0 < pm_decrease <= 1)
+%* mix_type: 1 para usar mixto elite-ruleta, de lo contrario se usa elite-boltzmann.
 %
 %Criterio de Seleccion y Reemplazo 
 %    
@@ -41,6 +43,7 @@
 %
 
 function [minimo, mejor_individuo] = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido)
+%function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -50,6 +53,7 @@ addpath(genpath('./criteria'));
 addpath(genpath('./aparear'));
 addpath(genpath('./print'));
 addpath(genpath('./evaluar'));
+format long;
 
 global P;
 global beta;
@@ -61,6 +65,8 @@ global G; %generation gap
 global series;
 global criterio_reemplazo;%criterio de seleccion
 global criterio_seleccion;%criterio de reemplazo
+global structure_changes;%para los cambios en las N generaciones con el criterio de estructura
+global structure_changes_n;%numero de generaciones que puede quedar la estructura sin cambios
 global apareo;%aparear
 global parte_pobl; %pocentaje de la población para el criterio de corte por estructura
 global error_estruc;
@@ -68,6 +74,7 @@ global error_estruc;
 global crossover_counter_total;
 global mutation_counter_total;
 global bpp_counter_total;
+global mx_type;
 
 %Parametros Fijos
 T = 2;
@@ -75,6 +82,7 @@ P = [3 5 1];
 beta = 0.3;
 
 %Paremtros Variables
+mx_type = mix_type;
 pc = cp;
 pm = mp;
 pbpp = 0.01;
@@ -87,10 +95,12 @@ criterio_seleccion = cs;
 metodo_reemplazo = metodoReemplazo;
 
 apareo = tipo_apareo;
-parte_pobl = 0.05; % porcentaje de población que debe cambiar para que no se corte por criterio de estructura
-error_estruc = 1e-04;
+parte_pobl = 0.70; % porcentaje de población que debe cambiar para que no se corte por criterio de estructura
+error_estruc = 1e-07;
 error_cont = 1e-07;
 
+structure_changes = []
+structure_changes_n = 5; 
 
 %maximo valor de P para formar la matriz
 m = max(P);
@@ -180,12 +190,14 @@ while(minimo > err && count <= max_generations  )
     minimo_anterior = minimo;
     
     
-    
     V = cell2matvec(individuos);
-
     %se hace la selección y las mutaciones
     V = V';
 
+	%actualizo pm
+	if( pm > 0.001 && mod(count, max_generations * 0.1) == 0)
+		pm = pm * pm_decrease;
+	end
 
     switch metodoReemplazo
 
@@ -201,8 +213,8 @@ while(minimo > err && count <= max_generations  )
         
     %CRITERIOS DE CORTE
     if (criterio_estructura == 1)   
-        changed = compute_change(V,R);
-        if ( changed == 0)
+        compute_change(V,R);    
+        if ( check_struck_non_change() )
               disp '[TERM] Terminación de ejecución por condición de estructura';
         break
         end
