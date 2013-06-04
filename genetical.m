@@ -42,7 +42,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido)
+function [minimo, mejor_individuo] = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
 %function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
