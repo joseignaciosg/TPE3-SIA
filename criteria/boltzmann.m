@@ -5,7 +5,7 @@ function [S, T] = boltzmann(V, F, k)
 
 global T;
 
-t_min = 540;
+t_min = 0.5;
 l = length(V(:,1));
 used = zeros(1,l);
 p = zeros(1, l); %probabilidad de cada uno
@@ -17,17 +17,16 @@ if(T > t_min)
 	T = T * 0.95;
 end
 
-F = F / sum(F);
-b_total = sum(exp(F)/T)
+F = F / max(F);
+b_total = sum(exp(F/T));
 
 while ( i <= l )
 	f = F(i);
-	p(i) = exp(f)/T;
-	q(i) = sum(p)/b_total;
+	p(i) = (exp(f/T))/b_total;
+	q(i) = sum(p);
 	i = i + 1;
 end
-T
-q
+
 i = 1;
 while (i <= k)
 	r = rand;

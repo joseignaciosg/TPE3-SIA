@@ -40,7 +40,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido)
+function [minimo, mejor_individuo] = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -70,7 +70,7 @@ global mutation_counter_total;
 global bpp_counter_total;
 
 %Parametros Fijos
-T = 1000;
+T = 2;
 P = [3 5 1];
 beta = 0.3;
 
@@ -96,7 +96,7 @@ error_cont = 1e-07;
 m = max(P);
 
 %Variables
-individuos = cell(cantidad_individuos,1);
+%individuos = cell(cantidad_individuos,1);
 fitness = [];
 minimo = 1;
 count = 1;
@@ -113,11 +113,11 @@ max_serie = max(series);
 series = series(1:750)./max_serie;
 
 %Se crea un vector con N individuos
-h=1;
-while ( h <= N)
-    individuos{h} = randommatrix(1,0.25);
-    h = h + 1;
-end
+%h=1;
+%while ( h <= N)
+%    individuos{h} = randommatrix(1,0.25);
+%    h = h + 1;
+%end
 
 
 print(metodoReemplazo,criterio_seleccion,criterio_reemplazo,apareo,count)   

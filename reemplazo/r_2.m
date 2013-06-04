@@ -5,11 +5,7 @@ function [S] = r_2(V, F)
 
 global G;
 global pc;
-global pm;
 global pbpp;
-global crossover_counter_total;
-global mutation_counter_total;
-global bpp_counter_total;
 
 crossover_counter = 0;
 mutation_counter = 0;
