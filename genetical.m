@@ -52,6 +52,7 @@ addpath(genpath('./criteria'));
 addpath(genpath('./aparear'));
 addpath(genpath('./print'));
 addpath(genpath('./evaluar'));
+format long;
 
 global P;
 global beta;
@@ -93,8 +94,8 @@ criterio_seleccion = cs;
 metodo_reemplazo = metodoReemplazo;
 
 apareo = tipo_apareo;
-parte_pobl = 0.05; % porcentaje de población que debe cambiar para que no se corte por criterio de estructura
-error_estruc = 1e-04;
+parte_pobl = 0.70; % porcentaje de población que debe cambiar para que no se corte por criterio de estructura
+error_estruc = 1e-07;
 error_cont = 1e-07;
 
 structure_changes = []

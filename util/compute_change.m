@@ -38,6 +38,5 @@ end
 
 structure_changes =  [ structure_changes changed ];
 
-structure_changes
 
 end
