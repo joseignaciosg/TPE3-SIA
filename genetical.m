@@ -61,6 +61,8 @@ global G; %generation gap
 global series;
 global criterio_reemplazo;%criterio de seleccion
 global criterio_seleccion;%criterio de reemplazo
+global structure_changes;%para los cambios en las N generaciones con el criterio de estructura
+global structure_changes_n;%numero de generaciones que puede quedar la estructura sin cambios
 global apareo;%aparear
 global parte_pobl; %pocentaje de la población para el criterio de corte por estructura
 global error_estruc;
@@ -91,6 +93,8 @@ parte_pobl = 0.05; % porcentaje de población que debe cambiar para que no se cor
 error_estruc = 1e-04;
 error_cont = 1e-07;
 
+structure_changes = []
+structure_changes_n = 5; 
 
 %maximo valor de P para formar la matriz
 m = max(P);
@@ -201,8 +205,8 @@ while(minimo > err && count <= max_generations  )
         
     %CRITERIOS DE CORTE
     if (criterio_estructura == 1)   
-        changed = compute_change(V,R);
-        if ( changed == 0)
+        compute_change(V,R);    
+        if ( check_struck_non_change() )
               disp '[TERM] Terminación de ejecución por condición de estructura';
         break
         end

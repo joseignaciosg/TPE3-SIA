@@ -4,6 +4,7 @@ function changed = compute_change(old_pop, new_pop)
 
 global parte_pobl;
 global error_estruc;
+global structure_changes;
 
 changed = 0;
 inv_n = size(old_pop,1);
@@ -35,6 +36,8 @@ if ( (ind_changed_counter/inv_n) > parte_pobl )
     changed = 1;
 end
 
+structure_changes =  [ structure_changes changed ];
 
+structure_changes
 
 end
