@@ -17,8 +17,9 @@ if(T > t_min)
 	T = T * 0.95;
 end
 
-F = F / sum(F);
-b_total = sum(exp(F)/T)
+F = F / max(F);
+b_total = sum(exp(F)/T)/length(F);
+
 
 while ( i <= l )
 	f = F(i);
@@ -26,8 +27,7 @@ while ( i <= l )
 	q(i) = sum(p)/b_total;
 	i = i + 1;
 end
-T
-q
+
 i = 1;
 while (i <= k)
 	r = rand;

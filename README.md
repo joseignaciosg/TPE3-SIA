@@ -5,8 +5,8 @@ Algoritmos geneticos
 %Forma de invocación
 %
 %[minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, criterio_seleccion,
-%                                        criterio_reemplazo, tipo_apareo, metodoReemplazo, error, error_estructura,
-%                                        error_contenido)
+%                                        criterio_reemplazo, tipo_apareo, metodoReemplazo, error, criterio_estructura,
+%                                        criterio_contenido, pm_decrease, mix_type)
 %
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 %* max_generations : Cantidad máxima de generaciones a correr 
@@ -22,6 +22,8 @@ Algoritmos geneticos
 %* error : Cota de corte por error.
 %* criterio_estructura: 1 si se usa el criterio de corte por estructura, 0 si no. 
 %* criterio_contenido: 1 si se usa el criterio de corte por contenido, 0 si no. 
+%* pm_decrease: cuanto varia pm cada vez que transcurren 10% de las iteraciones totales, 1 si no varia. (0 < pm_decrease <= 1)
+%* mix_type: 1 para usar mixto elite-ruleta, de lo contrario se usa elite-boltzmann.
 
 Criterios de Seleccion y Reemplazo
     

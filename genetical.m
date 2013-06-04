@@ -1,6 +1,6 @@
 %Forma de invocación
 %
-%[minimo, [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido)
+%[minimo, [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido, pm_decrease, mix_type)
 %
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 %* max_generations : Cantidad máxima de generaciones a correr 
@@ -15,6 +15,8 @@
 %* error : Cota de corte por error.
 %* criterio_estructura: 1 si se usa el criterio de corte por estructura, 0 si no. 
 %* criterio_contenido: 1 si se usa el criterio de corte por contenido, 0 si no. 
+%* pm_decrease: cuanto varia pm cada vez que transcurren 10% de las iteraciones totales, 1 si no varia. (0 < pm_decrease <= 1)
+%* mix_type: 1 para usar mixto elite-ruleta, de lo contrario se usa elite-boltzmann.
 %
 %Criterio de Seleccion y Reemplazo 
 %    
@@ -40,7 +42,7 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido)
+function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -70,6 +72,7 @@ global error_estruc;
 global crossover_counter_total;
 global mutation_counter_total;
 global bpp_counter_total;
+global mx_type;
 
 %Parametros Fijos
 T = 1000;
@@ -77,6 +80,7 @@ P = [3 5 1];
 beta = 0.3;
 
 %Paremtros Variables
+mx_type = mix_type;
 pc = cp;
 pm = mp;
 pbpp = 0.01;
@@ -184,12 +188,14 @@ while(minimo > err && count <= max_generations  )
     minimo_anterior = minimo;
     
     
-    
     V = cell2matvec(individuos);
-
     %se hace la selección y las mutaciones
     V = V';
 
+	%actualizo pm
+	if( pm > 0.001 && mod(count, max_generations * 0.1) == 0)
+		pm = pm * pm_decrease;
+	end
 
     switch metodoReemplazo
 
