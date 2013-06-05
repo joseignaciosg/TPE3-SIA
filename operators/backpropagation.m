@@ -20,9 +20,10 @@ windowsize = P(1);
 
 index = P(1) -1; %resto -1 para que de bien el index en el vector testing
 
-%normalizacion
+%Series a tomar en cuenta para entrenamiento
 max_serie = max(abs(series));
-series = series./max_serie;
+series = series(1:750)./max_serie;
+
 
 dif = 10;
 old = 11;
