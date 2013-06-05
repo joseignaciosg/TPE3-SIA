@@ -7,10 +7,10 @@ cuadratic_error = 0;
 j=1;
 windowsize = P(1);
 
-while(j<=size(patterns,1))
+while(j<=length(patterns)-windowsize)
     
-    E = patterns(j,1:windowsize);
-    s = patterns(j,windowsize+1);
+    E = patterns(j:j+windowsize-1);
+    s = patterns(windowsize+1);
     
     max_neurons =max(P);
     m = length(P); %layers number
@@ -40,5 +40,5 @@ while(j<=size(patterns,1))
     cuadratic_error = cuadratic_error + (s-o)^2;
 end
 
-cuadratic_error = cuadratic_error/(i-1); %patterns
+cuadratic_error = cuadratic_error/(j-1); %patterns
 end

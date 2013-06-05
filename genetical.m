@@ -1,5 +1,5 @@
 %Forma de invocación
-%
+%genetical(individuos(1:30),x.x, 15, 30, 0.8, 0.005, 0.75, 2, 4, 1, 2, 0.000000000001, 0, 1, 1, 0)
 %[minimo, [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido, pm_decrease, mix_type)
 %
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
@@ -42,8 +42,8 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
-%function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
+%function [minimo, mejor_individuo] = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
+function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
@@ -125,11 +125,11 @@ max_serie = max(series);
 series = series(1:750)./max_serie;
 
 %Se crea un vector con N individuos
-%h=1;
-%while ( h <= N)
-%    individuos{h} = randommatrix(1,0.25);
-%    h = h + 1;
-%end
+h=1;
+while ( h <= N)
+    individuos{h} = randommatrix(1,0.25);
+    h = h + 1;
+end
 
 
 print(metodoReemplazo,criterio_seleccion,criterio_reemplazo,apareo,count)   
@@ -229,6 +229,7 @@ while(minimo > err && count <= max_generations  )
              os = sprintf('Minimo anterior: %f / Mínimo actual: %f / Diferencia: %f', minimo_anterior,minimo, abs(minimo_anterior-minimo));
              disp(os);
              breakerror_cont = 1e-04;
+             break;
         end
     end
     
@@ -239,7 +240,8 @@ while(minimo > err && count <= max_generations  )
     outputString2 = sprintf('\n\n');
     disp(outputString2);
     
-	plot(x,maximos,x,minimos,x,promedios);
+    figure(1);
+	plot(x,maximos,'red',x,minimos,'green',x,promedios,'blue');
 end
 
 print_total();

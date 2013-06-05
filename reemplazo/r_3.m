@@ -82,7 +82,6 @@ f=1./f;
 
 S = zeros(N, l);
 
-print_stats(crossover_counter,mutation_counter,bpp_counter);
 increment_total_counters(crossover_counter,mutation_counter,bpp_counter);
 
 S(1 : N, :) = reemplazar(R, f, N);
