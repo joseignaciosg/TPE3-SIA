@@ -85,7 +85,7 @@ beta = 0.3;
 mx_type = mix_type;
 pc = cp;
 pm = mp;
-pbpp = 0.01;
+pbpp = 0;
 err = error;
 G = gap;
 series = serie;
@@ -241,6 +241,8 @@ while(minimo > err && count <= max_generations  )
     disp(outputString2);
     
     figure(1);
+	plot(x,1./maximos,'red',x,1./minimos,'green',x,1./promedios,'blue');
+    figure(2);
 	plot(x,maximos,'red',x,minimos,'green',x,promedios,'blue');
 end
 
