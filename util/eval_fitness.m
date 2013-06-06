@@ -1,44 +1,65 @@
-function cuadratic_error = eval_fitness(patterns,A)
+function cuadratic_error = eval_fitness(series,A)
 
 global P;
 global beta;
 
-cuadratic_error = 0;
-j=1;
+
+%maximo valor de P para formar la matriz
+m = max(P);
+
 windowsize = P(1);
 
-while(j<=length(patterns)-windowsize)
-    
-    E = patterns(j:j+windowsize-1);
-    s = patterns(windowsize+1);
-    
-    max_neurons =max(P);
-    m = length(P); %layers number
-    V = zeros(m, max_neurons + 1); %+1 for the threshold
+index = P(1) -1; %resto -1 para que de bien el index en el vector testing
 
-    %the first row of V are the inputs
-    aux = zeros(1,length(V(1,:))-length(E)-1);
-    if (length(aux)>=1)
-        E = [-1 E aux];
-        V(1,:) =  E;
-    else
-        E = [-1 E];
-        V(1,:) = E;
+%Series a tomar en cuenta para entrenamiento
+
+series1 = series;
+maxserie = max(abs(series));
+series = series./maxserie;
+
+%Variables
+x = [];
+os=[];
+ss=[];
+diffs = [];
+diffs2 = [];
+diffs_square = [];
+error=[];
+count = 0;
+
+max_diff = 0;
+min_diff = inf;
+diff = 0;
+diff2 = 0;
+cuadratic_error = 0;
+acceptable_values=0;
+    i=1;
+	while(i<=(length(series)-windowsize))
+		s = series(i+windowsize);
+		[s,o] = variable4testing(series(i:i+windowsize-1),A,P,s,beta);
+		i=i+1;
+		final_s = s * maxserie;
+		final_o = o * maxserie;
+		
+		os = [os final_o];
+    	ss = [ss final_s];
+    	x = [i x];
+        diff = abs(final_s-final_o);
+        diff2 = final_s-final_o;
+        cuadratic_error = cuadratic_error + (s-o)^2;
+        error = [error diff];
+        diffs = [diffs diff];
+        diffs2 = [diffs2 diff2];
+        if(max_diff<diff)
+            max_diff = diff;
+        end
+        if(min_diff>diff)
+            min_diff = diff;
+        end
+
     end
-  
-    %computes outputs 
-    i = 1;
-    while(i<m)
-       membrane_potential = A(:,:,i)*V(i,:)';
-       V(i+1,:) =  [-1 tanh(membrane_potential'.* beta)];
-       i=i+1;
-    end
-       
-    %final output
-    o = V(m,2);
-    j=j+1;
-    cuadratic_error = cuadratic_error + (s-o)^2;
+    cuadratic_error = cuadratic_error / (i-1);
+    
+
 end
 
-cuadratic_error = cuadratic_error/(j-1); %patterns
-end
