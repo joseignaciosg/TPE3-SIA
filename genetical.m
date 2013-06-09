@@ -8,7 +8,7 @@
 %* gap : Brecha Generacional
 %* mp :  Probabilidad de Mutuacion
 %* cp :  Probabilidad de CrossOver
-%* cs : Identifica al criterio de seleccion a utilizar
+%* cs : Identifica al criterio de seleccion a utilizar 
 %* cr : Identifica al criterio de reemplazo a utilizar
 %* tipo_apareo : Metodo de Apareo
 %* metodoReemplazo : Corresponde al metodo de Reemplazo visto en clase
@@ -42,7 +42,10 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-function [minimo, mejor_individuo] = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
+
+function [minimo, mejor_individuo,crossover_counter_total,mutation_counter_total,bpp_counter_total]...
+    = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, ...
+    tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
 %function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
