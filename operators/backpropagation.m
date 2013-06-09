@@ -71,7 +71,7 @@ function [a] = backpropagation( a )
         errors = [dif errors];
         x = [x count+1];
         etas = [etas eta];
-        cuadratic_error
+        %cuadratic_error
         cuadratic_errors = [cuadratic_errors cuadratic_error];
         %cuadratic_errors
         %x
