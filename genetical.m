@@ -42,7 +42,6 @@
 %   PARA EJEMPLOS DE INVOCACION RECURRIR AL README
 %
 
-
 function [minimo, mejor_individuo,crossover_counter_total,mutation_counter_total,bpp_counter_total]...
     = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, ...
     tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
@@ -103,8 +102,8 @@ error_estruc = 1e-07;
 error_cont = 1e-04;
 
 
-structure_changes = []
-content_changes  = []
+structure_changes = [];
+content_changes  = [];
 changes_n = 5; 
 
 %maximo valor de P para formar la matriz
@@ -250,5 +249,5 @@ while(minimo > err && count <= max_generations  )
 end
 
 print_total();
-
+minimo
 end

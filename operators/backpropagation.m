@@ -91,8 +91,6 @@ function [a] = backpropagation( a )
 
     a = mat2vec(A);
 
-    disp 'aca esta la posta';
-    c = eval_fitness(series,A)
 end
 
 

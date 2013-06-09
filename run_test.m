@@ -8,14 +8,21 @@ load individuos;
 %       | sel_crit,rem_crit, tipo_apar, metodo_rem,error,criterio_estructura
 %       | ,criterio_contenido, pm_decrease, mix_type)
 
-params = [10,1,10,0.8,0.005,0.75,2,4,1,2,0.000000000001,0,0,0,0;
-          20,1,20,0.8,0.005,0.75,2,4,1,2,0.000000000001,0,0,0,0;  ]
+%casos de prueba
+params = [10,5,10,0.8,0.005,0.75,1,1,1,1,0.000000000001,0,0,0,0; %probando elite
+          20,5,20,0.8,0.005,0.75,1,1,1,1,0.000000000001,0,0,0,0;
+          30,5,30,0.8,0.005,0.75,1,1,1,1,0.000000000001,0,0,0,0;
+          30,5,30,0.8,0.005,0.75,1,1,1,1,0.000000000001,0,0,0,0;
+          40,5,40,0.8,0.005,0.75,1,1,1,1,0.000000000001,0,0,0,0;
+          50,5,50,0.8,0.005,0.75,1,1,1,1,0.000000000001,0,0,0,0;
+          100,5,100,0.8,0.005,0.75,1,1,1,1,0.000000000001,0,0,0,0;];
 i=1;
+test_counter=1;
 N = size(params,1);
 while (i <= N)
-    os1 = sprintf('results/test%d.txt', i); 
+    os1 = sprintf('results/test%d.txt', test_counter); 
     fileID = fopen(os1,'w'); 
-    os2 = sprintf('Test %d\n\n', i); 
+    os2 = sprintf('Test %d\n\n', test_counter); 
     
     %imprimendo parámetros
     fprintf(fileID,os2);
@@ -28,7 +35,7 @@ while (i <= N)
     fprintf(fileID,'Criterio de Seleccion     :%d\n', params(i,7));
     fprintf(fileID,'Criterio de Reemplazo     :%d\n', params(i,8));
     fprintf(fileID,'Metodo de Apareo          :%d\n', params(i,9));
-    fprintf(fileID,'Metodo de Reemplazo       :%d\n', params(i,9));
+    fprintf(fileID,'Metodo de Reemplazo       :%d\n', params(i,10));
     fprintf(fileID,'Error                     :%f\n', params(i,11));
     fprintf(fileID,'Criterio corte estructura :%d\n', params(i,12));
     fprintf(fileID,'Criterio corte contenido  :%d\n', params(i,13));
@@ -41,14 +48,19 @@ while (i <= N)
         params(i,6), params(i,7), params(i,8), params(i,9), params(i,10), params(i,11), params(i,12),...
         params(i,13), params(i,14),params(i,15) );
     
-    %imprimiento estadísticas
+    %imprimiendo estadísticas
     fprintf(fileID,'\nminimo\t\t crossover total\t mutation total\t\t bpp total\t\n');
     fprintf(fileID,'%f\t\t %d\t\t %d\t\t\t %d\n\n',minimo,crossover_counter_total,...
         mutation_counter_total,bpp_counter_total);
     
-    %imprimiento mejor individuo
-    fprintf(fileID,'Individuo mas apto:\n\n');
+    %imprimiendo mejor individuo
+    fprintf(fileID,'Individuo mas apto:\n');
     dlmwrite(os1, mejor_individuo,'-append')
     fclose(fileID);
-    i=i+1;
+    
+    %todas las pruebas se hacen dos veces para probar mejor
+    if( mod(i,2) == 0 )
+        i=i+1;
+    end
+    test_counter = test_counter+1;
 end
