@@ -1,7 +1,7 @@
-Test 23
+Test 1
 
 Parameters:
-Cantidad de Individuos    :200
+Cantidad de Individuos    :100
 Cantidad de Generaciones  :20
 Brecha Generacional       :0.800000
 Probabilidad de Mutacion  :0.005000
@@ -15,3 +15,13 @@ Criterio corte estructura :0
 Criterio corte contenido  :0
 Pm decrease               :0
 Mix Type                  :0
+
+minimo		 crossover total	 mutation total		 bpp total	
+0.015350		 12		 0			 7
+
+Individuo mas apto:
+12.931,-0.031749,8.2552,-7.4024,0,0,-2.8845,8.667,-5.4797,5.5571,5.9284,4.9926
+-13.108,-0.06576,13.431,-12.7,0,0,0,0,0,0,0,0
+-3.3889,-0.092237,11.3,-11.383,0,0,0,0,0,0,0,0
+-8.1052,0.038883,4.5786,-2.8796,0,0,0,0,0,0,0,0
+-7.3974,0.053549,-13.466,13.49,0,0,0,0,0,0,0,0

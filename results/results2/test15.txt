@@ -1,0 +1,17 @@
+Test 15
+
+Parameters:
+Cantidad de Individuos    :100
+Cantidad de Generaciones  :100
+Brecha Generacional       :0.900000
+Probabilidad de Mutacion  :0.050000
+Probabilidad de CrossOver :0.750000
+Criterio de Seleccion     :3
+Criterio de Reemplazo     :3
+Metodo de Apareo          :1
+Metodo de Reemplazo       :3
+Error                     :0.000000
+Criterio corte estructura :0
+Criterio corte contenido  :0
+Pm decrease               :0
+Mix Type                  :0
