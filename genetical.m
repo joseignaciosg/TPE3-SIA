@@ -1,7 +1,7 @@
 %Forma de invocación
-%genetical(individuos(1:30),x.x, 15, 30, 0.8, 0.005, 0.75, 2, 4, 1, 2, 0.000000000001, 0, 1, 1, 0)
-%[minimo, [minimo, mejor_individuo] = genetical(serie,max_generations,cantidad_individuos,gap,mp,cp, cs,cr, tipo_apareo,metodoReemplazo,error,criterio_estructura,criterio_contenido, pm_decrease, mix_type)
-%
+%[minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp,...
+%        cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, ...
+%        pm_decrease, mix_type)
 %* serie : Serie a predecir, propuestas por la catedra en el TP anterior.
 %* max_generations : Cantidad máxima de generaciones a correr 
 %* cantidad_individuos : Cantidad de Individuos que van a conformar la poblacion
@@ -45,7 +45,9 @@
 function [minimo, mejor_individuo,crossover_counter_total,mutation_counter_total,bpp_counter_total]...
     = genetical(individuos,serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, ...
     tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
-%function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp, cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, pm_decrease, mix_type)
+%function [minimo, mejor_individuo] = genetical(serie, max_generations, cantidad_individuos, gap, mp,...
+%        cp, cs, cr, tipo_apareo, metodoReemplazo, error, criterio_estructura, criterio_contenido, ...
+%        pm_decrease, mix_type)
 
 %para que se pueda ejecutar las funciones en las siguientes carpetas
 addpath(genpath('./util'));
