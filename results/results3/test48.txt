@@ -1,0 +1,27 @@
+Test 48
+
+Parameters:
+Cantidad de Individuos    :100
+Cantidad de Generaciones  :30
+Brecha Generacional       :0.900000
+Probabilidad de Mutacion  :0.050000
+Probabilidad de CrossOver :0.750000
+Criterio de Seleccion     :5
+Criterio de Reemplazo     :3
+Metodo de Apareo          :1
+Metodo de Reemplazo       :2
+Error                     :0.000000
+Criterio corte estructura :0
+Criterio corte contenido  :0
+Pm decrease               :0
+Mix Type                  :0
+
+minimo		 crossover total	 mutation total		 bpp total	
+0.408662		 26		 0			 16
+
+Individuo mas apto:
+0.21596,0.46539,0.21086,0.48766,0,0,-0.23197,0.23029,0.72692,-0.15412,-0.12618,0.34882
+-6.665,-0.22297,-17.105,17.515,0,0,0,0,0,0,0,0
+-0.9361,-0.077377,3.6189,0.068922,0,0,0,0,0,0,0,0
+0.49364,0.60487,0.449,0.49804,0,0,0,0,0,0,0,0
+-0.09026,0.54323,-2.5296,3.9046,0,0,0,0,0,0,0,0
